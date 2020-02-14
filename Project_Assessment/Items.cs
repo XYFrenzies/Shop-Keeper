@@ -29,6 +29,22 @@ namespace Project_Assessment
 
 
         }
+        public virtual void beginningMessage()
+        {
+            //This will be the beginning dialogue of the program.
+            Console.WriteLine("Welcome young traveller. How can I help you today?");
+            Console.WriteLine("I have a range of goods that might interest you.");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("The goods that I have available are Armour, weapons of any kind and potions.");
+            Console.WriteLine("Hope I encapsulate your taste of equipment.");
+            Console.WriteLine("");
+            Console.WriteLine("What would you like to look at first?");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("This is the " + Name + " It weighs about " + Weight +"Kg.");
+        }
+
         //The following is used if the value of the variable is changed and called upon, it can be used through their "keywords"
         //Which in this case, it will be for saying what is on sale as well as what you have available for selling.
         public string Name 
@@ -48,27 +64,6 @@ namespace Project_Assessment
             get { return costOfItem; }
             set { this.costOfItem = value; }
         }
-
- /*    
-
-        public string TypeOfPotion 
-        {
-            get { return typeOfPotion; }
-            set { this.typeOfPotion = value; }
-        }
-
-        public int ChangedSatsOfPotion
-        {
-            get { return changedStatsOfPotion; }
-            set { this.changedStatsOfPotion = value; }
-        }
-
-        public string PotionDescription
-        {
-            get { return potionDescription; }
-            set { this.potionDescription = value; }
-        }
-
-/*/        
+       
     }
 }

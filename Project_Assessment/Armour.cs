@@ -8,6 +8,16 @@ namespace Project_Assessment
 {
     public class Armour : Items
     {
+
+        public override void beginningMessage()
+        {
+            base.beginningMessage();
+            Console.WriteLine("It is a " + armourType + " that has " + armourHealth + " extra health.");
+            Console.ReadKey();
+        }
+
+
+
         private string armourName; //This is as a placeholder for the name in the item class.
         private int weightOfArmour; //This is as a placeholder for the value of weight in item.
         private int costOfArmour; //This is as a placeholder for the value of cost in item.
