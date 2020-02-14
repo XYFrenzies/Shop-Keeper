@@ -56,13 +56,13 @@ namespace Project_Assessment
 
             }
 
-            for (i = 0; i < 100; i++)
+           /* for (i = 0; i < 100; i++)
             {
                 Console.ReadLine();
 
                 if( )
-            }
-
+            }/*/
+            //This is the start of the checking of the input. Will take a few days to make sure that it works successfully.
 
 
 
