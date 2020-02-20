@@ -10,6 +10,7 @@ namespace Project_Assessment
 {
     class Program
     {
+        //These are the different Items that will be available for you in the shop or on the player.
         static public Weapon longSwordOfDestiny = new Weapon("Long Sword Of Destiny", 20, 900, 20, 100, 1);
         static public Weapon deathbringerAxe = new Weapon("The Last DeathBringer", 25, 1000, 3, 150, 2);
         static public Weapon crossBow = new Weapon("Enchanted CrossBow of Truth", 10, 1000, 500, 70, 1);
@@ -33,17 +34,17 @@ namespace Project_Assessment
         //This is a undefined variable that is used as part of the checking for what the player says.
         static public string playerInteraction;
 
-        static public void CheckingForItemsInShop(Items[] items)
+        public void CheckingForItemsInShop(Items[] items)
         {
 
             //This is asking for a player input for what type of weapon you would need.
             for (int i = 0; i < 1; i++)
             {
 
-                if (playerInteraction = items[Name])
+                if (playerInteraction.Contains(items[Name]))
                 {
                     //This is asking that if the players input is the same as the name of the weapon in the array, print out this line.
-                    Console.WriteLine("" + Name + " is worth $" + Cost + " and it weighs " + Weight + ".");
+                    Console.WriteLine("" + items.Name + " is worth $" + items.Cost + " and it weighs " + items.Weight + ".");
                     Console.WriteLine("");
                     i++;
                 }
@@ -66,21 +67,26 @@ namespace Project_Assessment
 
         }
 
-        static public void CheckingYN()
+        static public void CheckingYN(Items item)
         {
-            //This is for checking if the player has input Yes or No.
-            if (playerInteraction = Console.ReadKey("Y"))
+            
+            for (int i = 0; i < 1; i++)
             {
-                
-            }
-            else if (playerInteraction = Console.ReadKey("N"))
-            {
-                
-            }
+                //This is for checking if the player has input Yes or No.
+                if (playerInteraction.Contains("Y"))
+                {
+                    Program.MoneyCalculator(item.playerMoney, item[Cost], item.shopKeeperMoney);
+                }
+                else if (playerInteraction.Contains("N"))
+                {
+                    //This will return the players interaction back to the beginning of the begin message loop.
+                }
 
-            else 
-            {
-                Console.WriteLine("Stop Wasting my time, tell me Y or N if you want something!");
+                else
+                {
+                    Console.WriteLine("Stop Wasting my time, tell me Y or N if you want something!");
+                    //In case this doesnt work.
+                }
             }
         }
 
@@ -111,7 +117,7 @@ namespace Project_Assessment
 
             else if (!File.Exists("Player.txt"))
             {
-                //This is to 
+                //This is to create a player text file.
                 StreamWriter playerValue;
                 playerValue = new StreamWriter("Player.txt");
                 playerValue.WriteLine("Long Sword Of Destiny");

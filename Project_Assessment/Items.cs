@@ -13,6 +13,8 @@ namespace Project_Assessment
         public string name;
         public int weightOfItem;
         public int costOfItem;
+        public int playerMoney = 1000;
+        public int shopKeeperMoney = 1000;
 
         public Items()
         {
@@ -33,8 +35,7 @@ namespace Project_Assessment
         }
         public virtual void beginningMessage()
         {
-            int playerMoney = 1000;
-            int shopKeeperMoney = 1000;
+
             for (int i = 0; i < 20; i++)
             {
 
@@ -66,21 +67,31 @@ namespace Project_Assessment
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.WriteLine("You have, $" + playerMoney + ".");
-                Console.WriteLine("What would you like to shop for now player or would you like to sell?");
+                Console.WriteLine("What would you like to shop for now player or would you like to sell? [B], [S]");
 
-                playerInteraction = Console.ReadLine();
+                Program.playerInteraction = Console.ReadLine();
 
-                Program.CheckingForItems();
+                for (int j = 0; j < 1; j++)
+                {
 
-                Console.WriteLine("Would you like to buy this item? [Y] [N]");
+                    if (Program.playerInteraction.Contains("B"))
+                    {
+                        Program.CheckingForItemsInShop();
+                        Console.WriteLine("Would you like to buy this item? [Y] [N]");
+                        Program.CheckingYN();
+                        Console.WriteLine("Done, you have " + playerMoney + " left. Would you like to continue? [Y] [N]");
+                    }
+                    else if (Program.playerInteraction.Contains("S"))
+                    {
 
-                Program.CheckingYN();
+                    }
+                    else
+                    {
+                        Console.WriteLine("What did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
+                        j = 0;
+                    }
+                }
 
-                Program.MoneyCalculator(playerMoney, Cost, shopKeeperMoney);
-                Console.WriteLine("Done, you have " + playerMoney + " left. Would you like to continue? [Y] [N]");
-
-                Console.WriteLine("");
-                Console.WriteLine("");
             }
         }
 
