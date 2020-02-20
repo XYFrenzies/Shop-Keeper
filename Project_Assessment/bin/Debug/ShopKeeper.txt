@@ -1,9 +1,9 @@
-Project_Assessment.Weapon
-Project_Assessment.Weapon
-Project_Assessment.Weapon
-Project_Assessment.Armour
-Project_Assessment.Armour
-Project_Assessment.Armour
-Project_Assessment.Potion
-Project_Assessment.Potion
-Project_Assessment.Potion
+Long Sword Of Destiny
+Deathbringer Axe
+CrossBow
+Holy HeadGear
+Holy ChestPeice
+Holy Pants
+God Almighty Potion
+DeadlyPoisonOfTheWest
+The Enchanted Potion
