@@ -14,6 +14,17 @@ namespace Project_Assessment
         private string typeOfPotion; //This can be a good potion or bad potion.
         private int changedStatsOfPotion; //This is what the Potion can do in terms of stats.
         private string potionDescription; //This is where the user can see what it does.
+
+        public override void Print()
+        {
+            Console.WriteLine($"{Name} is a Potion that weighs about {Weight} Kg's.");
+            Console.WriteLine($"This potion {TypeOfPotion} {ChangedStatsOfPotion}.");
+            Console.WriteLine($"{PotionDescription}.");
+            Console.WriteLine($"The cost of this Potion is {Cost} coins.");
+
+        }
+
+
         public Potion() 
         {
             potionName = "UndefinedPotion!";

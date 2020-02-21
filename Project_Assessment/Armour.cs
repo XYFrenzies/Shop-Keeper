@@ -9,12 +9,13 @@ namespace Project_Assessment
     public class Armour : Item
     {
 
-        /*public override void beginningMessage()
+        public override void Print()
         {
-            base.beginningMessage();
-            Console.WriteLine("It is a " + armourType + " that has " + armourHealth + " extra health.");
+            Console.WriteLine($"{Name} is a " + armourType + " that has " + armourHealth + " extra health.");
+            Console.WriteLine($"It weighs about{Weight} and can resist {ArmourResistence}");
+            Console.WriteLine($"It costs about {Cost} coins.");
             Console.ReadKey();
-        }/*/
+        }
 
 
 

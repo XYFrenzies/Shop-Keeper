@@ -14,6 +14,18 @@ namespace Project_Assessment
         private int range; //This is per meter.
         private int damage; //This is dependant on the varient of the weapon.
         private int attackSpeed; //How fast can the player attack. Attacks per second.
+
+        public override void Print()
+        {
+            Console.WriteLine($"{Name} is a weapon that weighs about {Weight} Kg's.");
+            Console.WriteLine($"This weapon deals {Damage} damage to enemies as well as having a range of {Range} metres.");
+            Console.WriteLine($"The attack speed of this weapon is {AttackSpeed} per second.");
+            Console.WriteLine($"The cost of this weapon is {Cost} coins.");
+
+        }
+
+
+
         public Weapon()
         {
             //The values in here are defults for multiple reaons.

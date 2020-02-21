@@ -32,6 +32,10 @@ namespace Project_Assessment
 
 
         }
+        public virtual void Print() 
+        {
+            Console.WriteLine(Name);
+        }
 
         //The following is used if the value of the variable is changed and called upon, it can be used through their "keywords"
         //Which in this case, it will be for saying what is on sale as well as what you have available for selling.

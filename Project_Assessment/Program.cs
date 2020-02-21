@@ -11,8 +11,6 @@ namespace Project_Assessment
     class Program
     {
         //These are the different Items that will be available for you in the shop or on the player.
-
-
         //For weapons, the categories are displayed as Name, Weight, Cost, Range, Damage, AttackSpeed.
         static public Weapon longSwordOfDestiny = new Weapon("Long Sword Of Destiny", 20, 900, 20, 100, 1);
         static public Weapon deathbringerAxe = new Weapon("The Last DeathBringer", 25, 1000, 3, 150, 2);
@@ -24,13 +22,13 @@ namespace Project_Assessment
         static public Armour holyPants = new Armour("The Holy Leggings", 10, 600, "Leggings", 400, "CrossBow");
 
         //For Potions, the categories are displayed as Name, Weight, Cost, Type of Potion, Stat changes, Description.
-        static public Potion godAlmightyPotion = new Potion("God Almighty Potion", 1, 300, "It gives you health of about ", 200,
+        static public Potion godAlmightyPotion = new Potion("God Almighty Potion", 1, 300, "gives you health of about ", 200,
             "Its so strong that it would only be used in a life or death situation.");
         static public Potion deadlyPoisonOfTheWest = new Potion("Deadly Poison of The West", 2, 1000,
-            "Deals increasing amounts of damage over 5 seconds, adding x2 damage each time", 20,
+            "deals increasing amounts of damage over 5 seconds, adding x2 damage each time", 20,
             "If you want a deadly toxin that can pressure anyone into fleeing, this is the potion for you.");
         static public Potion theEnchantedPotion = new Potion("The Enchanted Potion of the Neverworlds", 1, 2000,
-            "It increases the level of the player by 1", 1,
+            "It increases the level of the player by", 1,
             "If your needing a high enough level for some of the upcoming fights, this potion should do the trick.");
 
         //This is split into two different arrays. One is for the shopkeeper, the other is for the player.
@@ -49,7 +47,7 @@ namespace Project_Assessment
         static private int playerMoney = 1000; //Default amounts of money that can be spent.
         static private int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.
 
-
+        //THis is a quick and easy way to calculate the money transaction between the player, the item, the shopKeeper.
         static public int MoneyCalculator(int x, int y, int z)
         {
             //This quick addition is for when the money is taken from the player, it updates and from minusing from the price.
@@ -67,6 +65,7 @@ namespace Project_Assessment
                 //This is for checking if the player has input Yes or No.
                 if (playerInteraction.Contains("Y"))
                 {
+                    //If this is activated, use the calculation to activate the cost of the item and minus it from the pla
                     //Program.MoneyCalculator(playerMoney, shopKeeper.inventory.Cost , shopKeeperMoney);
                     break;
                 }
@@ -185,57 +184,55 @@ namespace Project_Assessment
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.WriteLine("Would you like to have a look at any of these? [Write the number next to the item.]");
-                Program.playerInteraction = Console.ReadLine();
-
-                for (int l = 0; l < shopKeeperInventory.InventoryLength; l++)
+                playerInteraction = Console.ReadLine();
+                //This is a check for if the playersInteraction is the same as the shopKeeper, then the print function will work.
+                int playerValue = Convert.ToInt32(playerInteraction);
+                if (shopKeeperInventory.inventory[playerValue] != null)
                 {
-                    if (shopKeeperInventory.inventory[l] == null)
-                    {
-                        Console.WriteLine("Sorry I don't think you understand what I said, what Item would you like to look at first?");
+                    shopKeeperInventory.inventory[playerValue].Print();
 
-                    }
+                    Console.WriteLine("You have, $" + playerMoney + ".");
+                    Console.WriteLine("What would you like to shop for now player or would you like to sell? [B], [S]");
 
-                    if (playerInteraction = Inventory.InventoryLength[l])
+                    Program.playerInteraction = Console.ReadLine();
+
+
+                    for (int j = 0; j < 100; j++)
                     {
-                        Console.WriteLine($"{shopKeeperInventory.inventory[l].Name} weighs about {shopKeeperInventory.inventory[l].Weight}Kg's");
-                        if (shopKeeperInventory.inventory[l] = Weapon)
+
+                        if (Program.playerInteraction.Contains("B"))
                         {
+                            Console.WriteLine("Would you like to buy this item? [Y] [N]");
+                            Program.playerInteraction = Console.ReadLine();
+                            Program checkingYN = new Program();
+                            checkingYN.CheckingYN();
+
+                            Console.WriteLine("Done, you have " + playerMoney + " left. Would you like to continue? [Y] [N]");
+                            break;
 
                         }
+                        else if (Program.playerInteraction.Contains("S"))
+                        {
+                            //Need to implement a sell function and the lot
+                        }
+                        else
+                        {
+                            Console.WriteLine("What did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
+                            Program.playerInteraction = Console.ReadLine();
+                            j = 0;
+                        }
                     }
+
+
+
                 }
-
-                Console.WriteLine("You have, $" + playerMoney + ".");
-                Console.WriteLine("What would you like to shop for now player or would you like to sell? [B], [S]");
-
-                Program.playerInteraction = Console.ReadLine();
-
-
-                for (int j = 0; j < 100; j++)
+                else
                 {
-                        
-                    if (Program.playerInteraction.Contains("B"))
-                    {
-                        Console.WriteLine("Would you like to buy this item? [Y] [N]");
-                        Program.playerInteraction = Console.ReadLine();
-                        Program checkingYN = new Program();
-                        checkingYN.CheckingYN();
 
-                        Console.WriteLine("Done, you have " + playerMoney + " left. Would you like to continue? [Y] [N]");
-                        break;
-                            
-                    }
-                    else if (Program.playerInteraction.Contains("S"))
-                    {
-                            
-                    }
-                    else
-                    {
-                        Console.WriteLine("What did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
-                        Program.playerInteraction = Console.ReadLine();
-                        j = 0;
-                    }
                 }
+
+
+
 
                 }
 
