@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Project_Assessment
 {
-    public class Armour : Items
+    public class Armour : Item
     {
 
-        public override void beginningMessage()
+        /*public override void beginningMessage()
         {
             base.beginningMessage();
             Console.WriteLine("It is a " + armourType + " that has " + armourHealth + " extra health.");
             Console.ReadKey();
-        }
+        }/*/
 
 
 

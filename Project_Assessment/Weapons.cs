@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_Assessment
 {
-    public class Weapon : Items
+    public class Weapon : Item
     {
         private string weaponName; //This is as a placeholder for the name in the item class.
         private int weightOfWeapon; //This is as a placeholder for the value of weight in item.

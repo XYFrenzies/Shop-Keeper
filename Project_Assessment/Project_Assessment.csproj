@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Armour.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="Potions.cs" />
     <Compile Include="Program.cs" />

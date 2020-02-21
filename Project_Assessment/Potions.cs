@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_Assessment
 {
-    public class Potion : Items
+    public class Potion : Item
     {
         private string potionName;
         private int weightOfPotion;
@@ -41,7 +41,7 @@ namespace Project_Assessment
             set { this.typeOfPotion = value; }
         }
 
-        public int ChangedSatsOfPotion
+        public int ChangedStatsOfPotion
         {
             get { return changedStatsOfPotion; }
             set { this.changedStatsOfPotion = value; }
