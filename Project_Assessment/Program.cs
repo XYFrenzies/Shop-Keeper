@@ -78,11 +78,14 @@ namespace Project_Assessment
                     {
                         Program p = new Program();
                         p.beginningMessage();
+                        //This is to call the function beginningmessage again
+
                     }
 
                     else if (playerInteraction.Contains("N"))
                     {
                         System.Environment.Exit(0);
+                        //This is to exit the console and the program when the player wants to exit.
                     }
 
                 }
@@ -90,7 +93,7 @@ namespace Project_Assessment
                 else
                 {
                     Console.WriteLine("Stop Wasting my time, tell me Y or N if you want something!");
-                    //In case this doesnt work.
+                    //In case the player presses the wrong key or something has gone wrong.
                 }
             }
         }
@@ -99,6 +102,7 @@ namespace Project_Assessment
 
         static public void Main()
         {
+            //This is adding the multiple different items into a list from the array. This list is from a function called Addinventory
             playerInventory.AddInventory(crossBow, holyHeadGear);
             shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe,
             holyChestPeice, holyPants, godAlmightyPotion, deadlyPoisonOfTheWest, theEnchantedPotion);
@@ -132,12 +136,13 @@ namespace Project_Assessment
                 playerValue = new StreamWriter("Player.txt");
                 playerValue.WriteLine("Long Sword Of Destiny");
                 playerValue.Close();
+                //Closing the text file is alwats needed.
 
             }
 
             Program p = new Program();
             p.beginningMessage();
-
+            //This naturally begins the beginningmessage function.
         }
 
 
@@ -170,11 +175,12 @@ namespace Project_Assessment
                 //}
                 //optionsAvailable.Close();
 
-
+                //This statement goes through a loop of the shopkeeperinventory storage.
                 for (int k = 0; k < shopKeeperInventory.InventoryLength; k++)
                 {
                     if (shopKeeperInventory.inventory[k] != null)
                     {
+                        //If there is something in the inventory, print it to the screen.
                         Console.WriteLine($"{k}: {shopKeeperInventory.inventory[k].Name}");
 
                     }
@@ -184,11 +190,16 @@ namespace Project_Assessment
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.WriteLine("Would you like to have a look at any of these? [Write the number next to the item.]");
+                //This is to allow the players to know what item they would like to have.
                 playerInteraction = Console.ReadLine();
                 //This is a check for if the playersInteraction is the same as the shopKeeper, then the print function will work.
                 int playerValue = Convert.ToInt32(playerInteraction);
+                //If the inventory space of the playervalue has something in it, then it will display whats in the statement.
                 if (shopKeeperInventory.inventory[playerValue] != null)
                 {
+                    //This uses the function within inventory called print.
+                    //Within every other class, the use of overrride is being able to read the line called print.
+                    //Allowing that when the player presses a value, that it receives the value and it displays a message from the classes.
                     shopKeeperInventory.inventory[playerValue].Print();
 
                     Console.WriteLine("You have, $" + playerMoney + ".");
@@ -196,27 +207,30 @@ namespace Project_Assessment
 
                     Program.playerInteraction = Console.ReadLine();
 
-
+                    //This is to check for the players response.
                     for (int j = 0; j < 100; j++)
                     {
-
+                        //If they player presses buy, use this statement.
                         if (Program.playerInteraction.Contains("B"))
                         {
                             Console.WriteLine("Would you like to buy this item? [Y] [N]");
                             Program.playerInteraction = Console.ReadLine();
+                            //When this is called, the program calles upon the function, checkingYN.
                             Program checkingYN = new Program();
                             checkingYN.CheckingYN();
-
+                            //Once done, the program returns here to print out the statement.
                             Console.WriteLine("Done, you have " + playerMoney + " left. Would you like to continue? [Y] [N]");
                             break;
 
                         }
+                        //If the player presses sell, use this statement.
                         else if (Program.playerInteraction.Contains("S"))
                         {
                             //Need to implement a sell function and the lot
                         }
                         else
                         {
+                            //This is a incase funtion if the player does not write the correct word or letter.
                             Console.WriteLine("What did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
                             Program.playerInteraction = Console.ReadLine();
                             j = 0;

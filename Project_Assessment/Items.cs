@@ -17,6 +17,9 @@ namespace Project_Assessment
 
         public Item()
         {
+            //The values in here are defults for multiple reaons.
+            //If the code isnt working properly and refers back to these values, at least we know that theres an issue within this class.
+            //This is also used as a constructor for the code.
             name = "Undefined Item!";
             weightOfItem = 10000;
             costOfItem = 1;
@@ -24,7 +27,7 @@ namespace Project_Assessment
 
         public Item(string a_nameOfItem, int a_weightOfItem, int a_costOfItem)
         {
-            //This is a reference to ever class that uses these universally used definitions.
+            //This is a reference to every class that uses these universally used definitions.
 
             name = a_nameOfItem;
             weightOfItem = a_weightOfItem;
@@ -44,18 +47,21 @@ namespace Project_Assessment
             get { return name; }
             set { this.name = value; }
         }
-
+        //This will be used to define the name of each item.
+        //It can easily be used in a writeline statement.
         public int Weight
         {
             get { return weightOfItem; }
             set { this.weightOfItem = value; }
         }
-
+        //This will be used to define the weight of the item.
+        //It can easily be used in a writeline statement.
         public int Cost
         {
             get { return costOfItem; }
             set { this.costOfItem = value; }
         }
-       
+        //This will be used to define the Cost of the item.
+        //It can easily be used in a writeline statement.
     }
 }
