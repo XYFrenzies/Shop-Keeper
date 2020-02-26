@@ -12,9 +12,8 @@ namespace Project_Assessment
         public override void Print()
         {
             Console.WriteLine($"{Name} is a " + armourType + " that has " + armourHealth + " extra health.");
-            Console.WriteLine($"It weighs about{Weight} and can resist {ArmourResistence}");
+            Console.WriteLine($"It weighs about {Weight} Kg's and can resist the {ArmourResistence}");
             Console.WriteLine($"It costs about {Cost} coins.");
-            Console.ReadKey();
         }
 
 
