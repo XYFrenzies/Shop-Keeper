@@ -44,12 +44,70 @@ namespace Project_Assessment
         //This is a undefined variable that is used as part of the checking for what the player says.
         static public string _playerInteraction;
 
-        static private int playerMoney = 1000; //Default amounts of money that can be spent.
-        static private int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.
+        public int playerMoney = 1000; //Default amounts of money that can be spent.
+        public int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.
+
+
+        static public Item [] MovingArrays(Item [] a_Receiver, Item [] a_Giver) 
+        {
+            //Basically I want to move the value w from the location x to the location z whilst trying to 
+            //find the length of it so it doesnt overwrite the variable 
+            //I'd basically need to find the value of w from the statement and find it within the array and place it into another array. 
+            
+
+
+            for (int i = 0; i < a_Giver.Length; i++)
+            {
+                a_Receiver[i] = a_Giver[i];
+            }
+
+
+
+
+            return a_Receiver;
+
+        }
+
+
+        static public string ConvertingFiles(Item a_item) 
+        {
+
+            //name = itemName;
+            Item WeapName1 = longSwordOfDestiny;
+            Item WeapName2 = deathbringerAxe;
+            Item WeapName3 = crossBow;
+
+            Item armourName1 = holyHeadGear;
+            Item armourName2 = holyChestPeice;
+            Item armourName3 = holyPants;
+
+            Item potionName1 = godAlmightyPotion;
+            Item potionName2 = deadlyPoisonOfTheWest;
+            Item potionName3 = theEnchantedPotion;
+
+            string total = WeapName1 + "," + WeapName2 + "," + WeapName3 + "," + armourName1 + "," + armourName2 + "," + armourName3 + "," +
+                potionName1 + "," + potionName2 + "," + potionName3 + ",";
+            // total = name + "," + ....;
+            return "";
+        }
+
 
         //This is the main function of the program.
         static public void Main()
         {
+            using (StreamWriter playerFile = new StreamWriter(@"D:\AIE programming course\Shop-Keeper\Project_Assessment.txt"))
+            {
+                for (int i = 0; i < itemArrayPlayer.Length; i++)
+                {
+                    //This is to get all the values within the array and to save it onto a text file.
+                    OpenFile(ConvertingFiles(itemArrayPlayer[i]));
+
+                }
+            }
+            
+
+
+
             //This is adding the multiple different items into a list from the array. This list is from a function called Addinventory
             playerInventory.AddInventory(crossBow, holyHeadGear);
             shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe,
@@ -77,16 +135,16 @@ namespace Project_Assessment
             //    shopKeeperValue.Close();
             //}
 
-            if (!File.Exists("Player.txt"))
-            {
-                //This is to create a player text file.
-                StreamWriter playerValue;
-                playerValue = new StreamWriter("Player.txt");
-                playerValue.WriteLine("Long Sword Of Destiny");
-                playerValue.Close();
-                //Closing the text file is alwats needed.
+            //if (!File.Exists("Player.txt"))
+            //{
+            //    //This is to create a player text file.
+            //    StreamWriter playerValue;
+            //    playerValue = new StreamWriter("Player.txt");
+            //    playerValue.WriteLine("Long Sword Of Destiny");
+            //    playerValue.Close();
+            //    //Closing the text file is alwats needed.
 
-            }
+            //}
 
             Program p = new Program();
             p.beginningMessage();
@@ -99,7 +157,7 @@ namespace Project_Assessment
             int newPlayerMoney; //This is the updated value for the players new money
             int newShopKeeperMoney; //This is the updated value for the shops money
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 2; i++)
             {
                 //This will be the beginning dialogue of the program.
                 Console.WriteLine("Welcome young traveller. How can I help you today?");
@@ -155,8 +213,9 @@ namespace Project_Assessment
 
                             for (int l = 0; l < 2; l++)
                             {
+
                                 //Thiys is for checking if the player has input Yes or No.
-                                if (playerInteraction == "Y")
+                                if (playerInteraction == "Y" && playerMoney >= shopKeeperInventory.inventory[l].Cost)
                                 {
 
                                     //If this is activated, use the calculation to activate the cost of the item and minus it from the players money value
@@ -180,6 +239,7 @@ namespace Project_Assessment
                                             newShopKeeperMoney = shopKeeperMoney; //This is updating the shops money from the transaction.
                                             Program startAgain = new Program();
                                             startAgain.beginningMessage();
+                                            i = 0;
                                         }
                                         else if (playerInteraction == "N")
                                         {
@@ -195,11 +255,14 @@ namespace Project_Assessment
                                             m = 0;
                                         }
                                     }
-
-
-
-                                    break;
                                 }
+                                else if (playerInteraction == "Y" && playerMoney < shopKeeperInventory.inventory[l].Cost)
+                                {
+                                    Console.WriteLine($"Sorry you do not have enough money for {shopKeeperInventory.inventory[l].Name}.");
+                                    Console.WriteLine($"You have {playerMoney} left, ");
+                                }
+
+
                                 else if (playerInteraction == "N")
                                 {
                                     //This will return the players interaction back to the beginning of the begin message loop.
@@ -211,6 +274,7 @@ namespace Project_Assessment
                                     {
                                         Program p = new Program();
                                         p.beginningMessage();
+                                        i = 0;
                                         //This is to call the function beginningmessage again
 
                                     }
@@ -242,7 +306,6 @@ namespace Project_Assessment
                             System.Environment.Exit(0);
 
                         }
-                        break;
 
                     }
                     //If the player presses sell, use this statement.
@@ -256,9 +319,6 @@ namespace Project_Assessment
 
                                 //If there is something in the inventory, print it to the screen.
                                 Console.WriteLine($"{n}: {playerInventory.inventory[n].Name}");
-                                
-
-
                             }
 
                             //This is for checking if theres nothing in the array.
@@ -271,6 +331,7 @@ namespace Project_Assessment
                                 {
                                     Program p = new Program();
                                     p.beginningMessage();
+                                    i = 0;
                                 }
                                 else if (playerInteraction == "N")
                                 {
@@ -307,7 +368,7 @@ namespace Project_Assessment
                                         newShopKeeperMoney = shopKeeperMoney - playerInventory.inventory[o].Cost;
                                         Console.WriteLine("");
                                         Console.WriteLine("");
-                                        Console.WriteLine($"Thank you, this is your new balence: {playerMoney}.");
+                                        Console.WriteLine($"Thank you, this is your new balence: {newPlayerMoney}.");
                                         Console.WriteLine("Would you like to continue? [Y] [N]");
                                         if (playerInteraction == "Y")
                                         {
@@ -315,6 +376,7 @@ namespace Project_Assessment
                                             newShopKeeperMoney = shopKeeperMoney;
                                             Program startAgain = new Program();
                                             startAgain.beginningMessage();
+                                            i = 0;
                                         }
                                         else if (playerInteraction == "N")
                                         {
@@ -340,14 +402,12 @@ namespace Project_Assessment
 
                         }
 
-                        //Need to implement a sell function and the lot
-
-
                     }
                     else if(playerInteraction != "S" || playerInteraction != "B")
                     {
                         //This is a incase funtion if the player does not write the correct word or letter.
                         Console.WriteLine("What did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
+                        i = 0;
                     }
                 }
 
