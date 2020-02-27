@@ -61,10 +61,13 @@ namespace Project_Assessment
             }
 
             //This is adding the multiple different items into a list from the array. This list is from a function called Addinventory
-            playerInventory.AddInventory(crossBow, holyHeadGear);
+            playerInventory.AddInventory(crossBow, holyHeadGear);//The players Inventory
             shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe,
-            holyChestPeice, holyPants, godAlmightyPotion, deadlyPoisonOfTheWest, theEnchantedPotion);
-            shopKeeperInventory.SearchInventory("");
+            holyChestPeice, holyPants, godAlmightyPotion, deadlyPoisonOfTheWest, theEnchantedPotion);//The shopKeepers Inventory
+
+            Program fileManagement = new Program();
+            fileManagement.CreatingFiles();
+
 
             Program p = new Program();
             p.beginningMessage();
@@ -112,11 +115,12 @@ namespace Project_Assessment
         //This then makes the location equal to null.
 
             for (int j = 0; j < a_buyer.Length; j++)
-            {
+            {//Going through the length of the array buyer
                 if (a_buyer[j] == null)
                 {
-                    a_buyer[j] = a_seller[newLocation];
-                    a_seller[newLocation] = null;
+                    //If the space of the buyer is blank...
+                    a_buyer[j] = a_seller[newLocation];//The buyer's inventory location = the sellers inventory location (swapping the locations).
+                    a_seller[newLocation] = null;//This is replacing the sellers item with nothing and leaving it null.
 
                     return;
                 }
@@ -125,42 +129,141 @@ namespace Project_Assessment
         }
 
 
-        static public string ConvertingFiles(Item a_item) 
+        public void CreatingFiles()
         {
-            //This is to display the items and their unique options onto the textfile.
-            //name = itemName;
-            Item WeapName1 = longSwordOfDestiny;
-            Item WeapName2 = deathbringerAxe;
-            Item WeapName3 = crossBow;
-
-            Item armourName1 = holyHeadGear;
-            Item armourName2 = holyChestPeice;
-            Item armourName3 = holyPants;
-
-            Item potionName1 = godAlmightyPotion;
-            Item potionName2 = deadlyPoisonOfTheWest;
-            Item potionName3 = theEnchantedPotion;
-
-            string totalShopKeeper = WeapName1 + "," + WeapName2 + "," + armourName2 + "," + armourName3 + "," +
-                potionName1 + "," + potionName2 + "," + potionName3;
-            // total = name + "," + ....;
-
-            string totalPlayer = WeapName3 + "," + armourName1;
+            //This is to save the array of shopKeeper items onto a text file called ShopKeeper.txt
             if (!File.Exists("ShopKeeper.txt"))
-            {
-                using (FileStream text = File.Create("ShopKeeper.txt"))
-                {
-                    return totalShopKeeper;
+            {//If the shopKeeper text doesnt exist...
+                StreamWriter shopKeeperWriter;
+                shopKeeperWriter = new StreamWriter("ShopKeeper.txt");//Create the text file shopKeeper.
+
+                for (int i = 0; i < shopKeeperInventory.InventoryLength; i++)
+                {//Going through the length of the array of the shopKeeper inventory.
+                    if (shopKeeperInventory.inventory[i] != null)
+                    {//This checks is the inventory is not equal to nothing.
+                        //This is a manual way of placing the values of the items onto the text file.
+                        string theItemTypeSK = shopKeeperInventory.inventory[i].GetType().ToString();//The type of string is defined first.
+                        string theNameSK = shopKeeperInventory.inventory[i].Name;//This is the name of the item.
+                        int theCostSK = shopKeeperInventory.inventory[i].Cost;//This is the cost of the item.
+                        int theWeightSK = shopKeeperInventory.inventory[i].Weight;//This is the Weight of the item.
+                        string theAdditionalInfoSK = "";//This is the attributes of the other variables that are with the class/Item.
+
+                        switch (theItemTypeSK)//Depending on the type within the inventory.
+                        {
+                            //This is the switch statement for when the item type is changed when its displayed to the text file. 
+                            case "Project_Assessment.Weapons"://Accessing the weapons class under the project assessment.
+                                Weapon redefinedWeaponSK = (Weapon)shopKeeperInventory.inventory[i];//Defining redefinedWeaponSK is a weapon within the shopKeeperInventory.
+                                theAdditionalInfoSK = redefinedWeaponSK.Range.ToString();//Adds the range to the text file and uses it as a string.
+                                theAdditionalInfoSK = redefinedWeaponSK.Damage.ToString();//Adds the damage to the text file and uses it as a string.
+                                theAdditionalInfoSK = redefinedWeaponSK.AttackSpeed.ToString();//Adds the AttackSpeed to the text file and uses it as a string.
+                                break;//Leaves the array.
+
+                            case "Project_Assessment.Armour"://Accessing the Armour class under the project assessment.
+                                Armour redefinedArmourSK = (Armour)shopKeeperInventory.inventory[i];//Defining redefinedArmourSK is a armour within the shopKeeperInventory.
+                                theAdditionalInfoSK = redefinedArmourSK.ArmourType.ToString();//Adds the ArmourType to the text file and uses it as a string.
+                                theAdditionalInfoSK = redefinedArmourSK.ArmourHealth.ToString();//Adds the ArmourHealth to the text file and uses it as a string.
+                                theAdditionalInfoSK = redefinedArmourSK.ArmourResistence.ToString();//Adds the ArmourResistence to the text file and uses it as a string.
+                                break;//Leaves the array.
+
+                            case "Project_Assessment.Potions"://Accessing the Potions class under the project assessment.
+                                Potion redefinedPotionsSK = (Potion)shopKeeperInventory.inventory[i];//Defining redefinedPotionsSK is a potion within the shopKeeperInventory.
+                                theAdditionalInfoSK = redefinedPotionsSK.TypeOfPotion.ToString();//Adds the TypeOfPotion to the text file and uses it as a string.
+                                theAdditionalInfoSK = redefinedPotionsSK.ChangedStatsOfPotion.ToString();//Adds the ChangeStatsOfPotion to the text file and uses it as a string.
+                                theAdditionalInfoSK = redefinedPotionsSK.PotionDescription.ToString();//Adds the PotionDescription to the text file and uses it as a string.
+                                break;//Leaves the array.
+
+                            default://If neither of the case statements are true.
+                                break;//Leaves the array.
+
+                        }
+
+                        //This displays on the writeLine, the item type, the name, the cost, the weight, and the additional information from the child classes.
+                        shopKeeperWriter.WriteLine($"{theItemTypeSK},{theNameSK},{theCostSK},{theWeightSK},{theAdditionalInfoSK}");
+                    }
                 }
+                //Closes the writer so that it stops writing.
+                shopKeeperWriter.Close();
             }
-            
-            return "";
+            //This is to save the array of player items onto a text file called player.txt
+            if (!File.Exists("Player.txt"))
+            {//If the player text doesnt exist...
+                //Create a new file called player.txt
+                StreamWriter playerWriter;
+                playerWriter = new StreamWriter("Player.txt");
+
+                for (int j = 0; j < playerInventory.InventoryLength; j++)
+                {//THis is a loop of the players inventory length and the items within that array.
+                    if (playerInventory.inventory[j] != null)
+                    {//If it isnt equal to null.
+                        string theItemTypeP = playerInventory.inventory[j].GetType().ToString();//The type of string is defined first.
+                        string theNameP = playerInventory.inventory[j].Name;//This is the name of the item.
+                        int theCostP = playerInventory.inventory[j].Cost;//This is the cost of the item.
+                        int theWeightP = playerInventory.inventory[j].Weight;//This is the Weight of the item.
+                        string theAdditionalInfoP = "";//This is the attributes of the other variables that are with the class/Item.
+
+                        //This is the switch statement for when the item type is changed when its displayed to the text file. 
+                        switch (theItemTypeP)//Depending on the type within the inventory.
+                        {
+                            case "Project_Assessment.Weapons"://Accessing the weapons class under the project assessment.
+                                Weapon redefinedWeaponP = (Weapon)playerInventory.inventory[j];//Defining redefinedWeaponP is a weapon within the playerInventory.
+                                theAdditionalInfoP = redefinedWeaponP.Range.ToString();//Adds the range to the text file and uses it as a string.
+                                theAdditionalInfoP = redefinedWeaponP.Damage.ToString();//Adds the Damage to the text file and uses it as a string.
+                                theAdditionalInfoP = redefinedWeaponP.AttackSpeed.ToString();//Adds the AttackSpeed to the text file and uses it as a string.
+                                break;//Leaves the array.
+
+                            case "Project_Assessment.Armour":
+                                Armour redefinedArmourP = (Armour)playerInventory.inventory[j];//Defining redefinedArmourP is a weapon within the playerInventory.
+                                theAdditionalInfoP = redefinedArmourP.ArmourType.ToString();//Adds the ArmourType to the text file and uses it as a string.
+                                theAdditionalInfoP = redefinedArmourP.ArmourHealth.ToString();//Adds the ArmourHealth to the text file and uses it as a string.
+                                theAdditionalInfoP = redefinedArmourP.ArmourResistence.ToString();//Adds the ArmourResistence to the text file and uses it as a string.
+                                break;//Leaves the array.
+
+                            case "Project_Assessment.Potions":
+                                Potion redefinedPotionsP = (Potion)playerInventory.inventory[j];//Defining redefinedPotionsP is a weapon within the playerInventory.
+                                theAdditionalInfoP = redefinedPotionsP.TypeOfPotion.ToString();//Adds the TypeOfPoions to the text file and uses it as a string.
+                                theAdditionalInfoP = redefinedPotionsP.ChangedStatsOfPotion.ToString();//Adds the ChangedStatsOfPotion to the text file and uses it as a string.
+                                theAdditionalInfoP = redefinedPotionsP.PotionDescription.ToString();//Adds the PotionDescription to the text file and uses it as a string.
+                                break;//Leaves the array.
+
+                            default://If neither of the case statements are true.
+                                break;//Leaves the array.
+                        }
+                        //This displays on the writeLine, the item type, the name, the cost, the weight, and the additional information from the child classes.
+                        playerWriter.WriteLine($"{theItemTypeP},{theNameP},{theCostP},{theWeightP},{theAdditionalInfoP}");
+                    }
+                    
+                }
+                //Closes the writer so that it stops writing.
+                playerWriter.Close();
+            }
         }
+
+        //This function is for the loading of the array items back onto the array.
+        //This will act as a save file.
+
+        //public static void LoadingInventoryFromFile(string newFileName)
+        //{
+        //    try
+        //    {
+        //        StreamWriter reader = new StreamWriter(newFileName);
+        //        while (reader.EndOfStream == false)
+        //        {
+        //            string reading = reader.ReadLine();
+        //            string[] args = reading.Split(",");
+        //        }
+        //    }
+        //    catch ()
+        //    {
+
+        //    }
+
+        //}
+
         public virtual void beginningMessage()
         {
 
             for (int i = 0; i < 2; i++)
-            {
+            {//This is a repetitive statement for if the player wants to continue buying.
                 //This will be the beginning dialogue of the program.
                 Console.WriteLine("Welcome young traveller. How can I help you today?");
                 Console.WriteLine("I have a range of goods that might interest you.\n");
@@ -169,25 +272,26 @@ namespace Project_Assessment
                 Console.WriteLine("What would you like to look at first, you can either buy or sell? [B] or [S]");
                 //This is to check for the players response.
                 for (int j = 0; j < 2; j++)
-                {
-                    _playerInteraction = Console.ReadLine();
-                    string playerInteraction = _playerInteraction.ToUpper();
+                {//Repetitive statement for asking the player, what they would rather, buy or sell.
+                    _playerInteraction = Console.ReadLine(); //Calls the string value _playerInteraction as a readLine as it is a null.
+                    string playerInteraction = _playerInteraction.ToUpper();//This is then used to put all the inputted values into uppercase through playerInteraction.
                     //If they player presses buy, use this statement.
                     if (playerInteraction == "B")
-                    {
+                    {//If the player presses b or B.
                         for (int k = 0; k < shopKeeperInventory.InventoryLength; k++)
-                        {
+                        {//This is checking through the shopKeepers inventory length of the array.
                             if (shopKeeperInventory.inventory[k] != null)
-                            {
+                            {//If the shopKeeper does have stuff in stock.
                                 //If there is something in the inventory, print it to the screen.
                                 Console.WriteLine($"{k}: {shopKeeperInventory.inventory[k].Name} which cost {shopKeeperInventory.inventory[k].Cost} coins.");
-
+                                //This is printing for every item name, a number before it and the cost of it.
                             }
                         }
+                        //This is to check if the player wants to buy the item by the item number before it.
                         Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");
                         playerInteraction = Console.ReadLine();
 
-
+                        //We dont need a _playerinteraction and the toupper as we need a integer not a string to compare.
                         //This is a check for if the playersInteraction is the same as the shopKeeper, then the print function will work.
                         int playerValue = Convert.ToInt32(playerInteraction);
                         //If the inventory space of the playervalue has something in it, then it will display whats in the statement.
@@ -196,31 +300,33 @@ namespace Project_Assessment
                             //This uses the function within inventory called print.
                             //Within every other class, the use of overrride is being able to read the line called print.
                             //Allowing that when the player presses a value, that it receives the value and it displays a message from the classes.
-                            shopKeeperInventory.inventory[playerValue].Print();
-                            Console.WriteLine("\nYou have, $" + playerMoney + ".\n");
+                            shopKeeperInventory.inventory[playerValue].Print();//This is calling the function print from inventory which is a overrride to all the other classes.
+                            Console.WriteLine("\nYou have, $" + playerMoney + ".\n");//Showing the players money.
                             Console.WriteLine("Do you want to buy this item? Yes or No. [Y] [N]");
-                            _playerInteraction = Console.ReadLine();
-                            playerInteraction = _playerInteraction.ToUpper();
+                            _playerInteraction = Console.ReadLine();//Calls the string value _playerInteraction as a readLine as it is a null.
+                            playerInteraction = _playerInteraction.ToUpper();//This is then used to put all the inputted values into uppercase through playerInteraction.
 
                             for (int l = 0; l < 2; l++)
-                            {
+                            {//This is a repetitive loop for when the player wants to buy the item or not.
                                 
-                                //Thiys is for checking if the player has input Yes or No.
+                                
                                 if (playerInteraction == "Y" && playerMoney >= shopKeeperInventory.inventory[playerValue].Cost)
-                                {
+                                {//This is checking if the player has written yes and that they have enough money to afford the cost of the item.
                                     //This is to decrease the playerMoney by the shopKeepers Item whilst 
-                                    playerMoney -= shopKeeperInventory.inventory[playerValue].Cost;
-                                    shopKeeperMoney += shopKeeperInventory.inventory[playerValue].Cost;
+                                    playerMoney -= shopKeeperInventory.inventory[playerValue].Cost;//This is maths to minus the players money from the shopkeepers items value.
+                                    shopKeeperMoney += shopKeeperInventory.inventory[playerValue].Cost;//This is to add the shopKeepers money from the profits of the items value.
                                     Console.WriteLine($"\nCongratulations, you have received the {shopKeeperInventory.inventory[playerValue].Name} " +
-                                        $"and now have {playerMoney} left.\n");
+                                        $"and now have {playerMoney} left.\n");//Displaying to the player that they have purchased the item.
 
-                                    Program buyerArrayChange = new Program();
+                                    Program buyerArrayChange = new Program();//This is creating buyerArrayChange to a definition of calling a function.
                                     buyerArrayChange.MovingArrays(ref shopKeeperInventory.inventory, ref playerInventory.inventory, playerValue);
-
+                                    //This is called when a transaction occurs. 
+                                    //Calling upon the playersinventory and the shopkeepers inventory whilst getting the vlaue of where the item was.
                                     for (int m = 0; m < 1; m++)
                                     {
-                                        Program continueShop = new Program();
-                                        continueShop.EndStatement();
+                                        
+                                        Program continueShop = new Program();//This is creating continueShop to a definition of calling a method.
+                                        continueShop.EndStatement();//This is calling the function EndStatement.
                                         m = 0;
                                     }
                                 }
@@ -331,17 +437,6 @@ namespace Project_Assessment
                         i = 0;
                     }
                 }
-                //The next statement is for the reading of whatever is in the text file.
-                StreamReader optionsAvailable = new
-                    StreamReader("ShopKeeper.txt");
-                //while (optionsAvailable.EndOfStream == false)
-                //{
-                //    string line = optionsAvailable.ReadLine();
-                //    //This is the reading from the text file.
-                //    //Whenever the stream is still not at the end, it continually reads it and prints it.
-                //    Console.WriteLine(line);
-                //}
-                //optionsAvailable.Close();
             }
         }
     }

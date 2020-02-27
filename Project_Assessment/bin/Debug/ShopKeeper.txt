@@ -1,9 +1,7 @@
-Long Sword Of Destiny
-Deathbringer Axe
-CrossBow
-Holy HeadGear
-Holy ChestPeice
-Holy Pants
-God Almighty Potion
-DeadlyPoisonOfTheWest
-The Enchanted Potion
+Project_Assessment.Weapon,Long Sword Of Destiny,900,20,
+Project_Assessment.Weapon,The Last DeathBringer,1000,25,
+Project_Assessment.Armour,The Holy ChestGuard,900,25,CrossBow
+Project_Assessment.Armour,The Holy Leggings,600,10,CrossBow
+Project_Assessment.Potion,God Almighty Potion,300,1,
+Project_Assessment.Potion,Deadly Poison of The West,1000,2,
+Project_Assessment.Potion,The Enchanted Potion of the Neverworlds,2000,1,

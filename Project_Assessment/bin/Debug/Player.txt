@@ -1,1 +1,2 @@
-Project_Assessment.Weapon
+Project_Assessment.Weapon,Enchanted CrossBow of Truth,1000,10,
+Project_Assessment.Armour,The Holy Headset,500,15,CrossBow
