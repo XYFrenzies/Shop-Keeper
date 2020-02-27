@@ -43,35 +43,91 @@ namespace Project_Assessment
 
         //This is a undefined variable that is used as part of the checking for what the player says.
         static public string _playerInteraction;
+        private string playerInteraction;
+        static public int playerMoney = 1000; //Default amounts of money that can be spent.
+        static public int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.
 
-        public int playerMoney = 1000; //Default amounts of money that can be spent.
-        public int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.
-
-
-        static public Item [] MovingArrays(Item [] a_Receiver, Item [] a_Giver) 
+        //This is the main function of the program.
+        static public void Main()
         {
-            //Basically I want to move the value w from the location x to the location z whilst trying to 
-            //find the length of it so it doesnt overwrite the variable 
-            //I'd basically need to find the value of w from the statement and find it within the array and place it into another array. 
-            
-
-
-            for (int i = 0; i < a_Giver.Length; i++)
+            using (StreamWriter playerFile = new StreamWriter(@"D:\AIE programming course\Shop-Keeper\Project_Assessment.txt"))
             {
-                a_Receiver[i] = a_Giver[i];
+                for (int i = 0; i < itemArrayPlayer.Length; i++)
+                {
+                    //This is to get all the values within the array and to save it onto a text file.
+                    //OpenFile(ConvertingFiles(itemArrayPlayer[i]));
+
+                }
             }
 
+            //This is adding the multiple different items into a list from the array. This list is from a function called Addinventory
+            playerInventory.AddInventory(crossBow, holyHeadGear);
+            shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe,
+            holyChestPeice, holyPants, godAlmightyPotion, deadlyPoisonOfTheWest, theEnchantedPotion);
+            shopKeeperInventory.SearchInventory("");
+
+            Program p = new Program();
+            p.beginningMessage();
+            //This naturally begins the beginningmessage function.
+        }
+
+        public void EndStatement()
+        {
+            //This will return the players interaction back to the beginning of the begin message loop.
+            Console.WriteLine("\nWould you like to continue looking around in the shop? [Y] [N]\n");
+            _playerInteraction = Console.ReadLine();
+            playerInteraction = _playerInteraction.ToUpper();
+
+            if (playerInteraction == "Y")
+            {
+                //Console.Clear is to romove the words from the console so it is easier to see what is on the next version of the interaction.
+                Console.Clear();
+                Program p = new Program();
+                p.beginningMessage();
+
+                //This is to call the function beginningmessage again
+
+            }
+            else if (playerInteraction == "N")
+            {
+                System.Environment.Exit(0);
+                //This is to exit the console and the program when the player wants to exit.
+            }
+            else 
+            {
+                //Incase the player does not produce the correct letter, y or n.
+                Console.WriteLine("\nSorry could you repeat that? Y or N.");
+                _playerInteraction = Console.ReadLine();
+                playerInteraction = _playerInteraction.ToUpper();
+
+            }
+        }
 
 
 
-            return a_Receiver;
+        public void MovingArrays(ref Item [] a_seller, ref Item [] a_buyer, int newLocation) 
+        {
+        //Within this function, its job is to move an item between the two different arrays.
+        //When a player buys or sells an item, the item is found within the array, the function finds space in the other array and then places it in there.
+        //This then makes the location equal to null.
+
+            for (int j = 0; j < a_buyer.Length; j++)
+            {
+                if (a_buyer[j] == null)
+                {
+                    a_buyer[j] = a_seller[newLocation];
+                    a_seller[newLocation] = null;
+
+                    return;
+                }
+            }
 
         }
 
 
         static public string ConvertingFiles(Item a_item) 
         {
-
+            //This is to display the items and their unique options onto the textfile.
             //name = itemName;
             Item WeapName1 = longSwordOfDestiny;
             Item WeapName2 = deathbringerAxe;
@@ -85,92 +141,32 @@ namespace Project_Assessment
             Item potionName2 = deadlyPoisonOfTheWest;
             Item potionName3 = theEnchantedPotion;
 
-            string total = WeapName1 + "," + WeapName2 + "," + WeapName3 + "," + armourName1 + "," + armourName2 + "," + armourName3 + "," +
-                potionName1 + "," + potionName2 + "," + potionName3 + ",";
+            string totalShopKeeper = WeapName1 + "," + WeapName2 + "," + armourName2 + "," + armourName3 + "," +
+                potionName1 + "," + potionName2 + "," + potionName3;
             // total = name + "," + ....;
-            return "";
-        }
 
-
-        //This is the main function of the program.
-        static public void Main()
-        {
-            using (StreamWriter playerFile = new StreamWriter(@"D:\AIE programming course\Shop-Keeper\Project_Assessment.txt"))
+            string totalPlayer = WeapName3 + "," + armourName1;
+            if (!File.Exists("ShopKeeper.txt"))
             {
-                for (int i = 0; i < itemArrayPlayer.Length; i++)
+                using (FileStream text = File.Create("ShopKeeper.txt"))
                 {
-                    //This is to get all the values within the array and to save it onto a text file.
-                    OpenFile(ConvertingFiles(itemArrayPlayer[i]));
-
+                    return totalShopKeeper;
                 }
             }
             
-
-
-
-            //This is adding the multiple different items into a list from the array. This list is from a function called Addinventory
-            playerInventory.AddInventory(crossBow, holyHeadGear);
-            shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe,
-            holyChestPeice, holyPants, godAlmightyPotion, deadlyPoisonOfTheWest, theEnchantedPotion);
-            shopKeeperInventory.SearchInventory("");
-
-            //if (!File.Exists("ShopKeeper.txt"))
-            //{
-            //    //Within this, it creates a text file called shopkeeper that keeps the inventory of the shopkeeper.
-            //    StreamWriter shopKeeperValue;
-            //    shopKeeperValue = new StreamWriter("ShopKeeper.txt");
-            //    shopKeeperValue.WriteLine("Long Sword Of Destiny");
-            //    shopKeeperValue.WriteLine("Deathbringer Axe");
-            //    shopKeeperValue.WriteLine("CrossBow");
-            //    shopKeeperValue.WriteLine("Holy HeadGear");
-            //    shopKeeperValue.WriteLine("Holy ChestPeice");
-            //    shopKeeperValue.WriteLine("Holy Pants");
-            //    shopKeeperValue.WriteLine("God Almighty Potion");
-            //    shopKeeperValue.WriteLine("DeadlyPoisonOfTheWest");
-            //    shopKeeperValue.WriteLine("The Enchanted Potion");
-
-            //    //DataTable datatable = new DataTable();
-            //    // StreamReader
-
-            //    shopKeeperValue.Close();
-            //}
-
-            //if (!File.Exists("Player.txt"))
-            //{
-            //    //This is to create a player text file.
-            //    StreamWriter playerValue;
-            //    playerValue = new StreamWriter("Player.txt");
-            //    playerValue.WriteLine("Long Sword Of Destiny");
-            //    playerValue.Close();
-            //    //Closing the text file is alwats needed.
-
-            //}
-
-            Program p = new Program();
-            p.beginningMessage();
-            //This naturally begins the beginningmessage function.
+            return "";
         }
-
-
-            public virtual void beginningMessage()
-            {
-            int newPlayerMoney; //This is the updated value for the players new money
-            int newShopKeeperMoney; //This is the updated value for the shops money
+        public virtual void beginningMessage()
+        {
 
             for (int i = 0; i < 2; i++)
             {
                 //This will be the beginning dialogue of the program.
                 Console.WriteLine("Welcome young traveller. How can I help you today?");
-                Console.WriteLine("I have a range of goods that might interest you.");
-                Console.WriteLine("");
-                Console.WriteLine("");
-                Console.WriteLine("The goods that I have available are Armour, weapons of any kind and potions.");
-                Console.WriteLine("Hope I encapsulate your taste of equipment.");
-                Console.WriteLine("");
+                Console.WriteLine("I have a range of goods that might interest you.\n");
+                Console.WriteLine("\nThe goods that I have available are Armour, weapons of any kind and potions.");
+                Console.WriteLine("Hope I encapsulate your taste of equipment.\n");
                 Console.WriteLine("What would you like to look at first, you can either buy or sell? [B] or [S]");
-
-
-
                 //This is to check for the players response.
                 for (int j = 0; j < 2; j++)
                 {
@@ -184,13 +180,11 @@ namespace Project_Assessment
                             if (shopKeeperInventory.inventory[k] != null)
                             {
                                 //If there is something in the inventory, print it to the screen.
-                                Console.WriteLine($"{k}: {shopKeeperInventory.inventory[k].Name}");
+                                Console.WriteLine($"{k}: {shopKeeperInventory.inventory[k].Name} which cost {shopKeeperInventory.inventory[k].Cost} coins.");
 
                             }
                         }
-                        Console.WriteLine("");
-                        Console.WriteLine("");
-                        Console.WriteLine("Would you like to have a look at any of these? [Write the number next to the item.]");
+                        Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");
                         playerInteraction = Console.ReadLine();
 
 
@@ -203,95 +197,53 @@ namespace Project_Assessment
                             //Within every other class, the use of overrride is being able to read the line called print.
                             //Allowing that when the player presses a value, that it receives the value and it displays a message from the classes.
                             shopKeeperInventory.inventory[playerValue].Print();
-                            Console.WriteLine("");
-                            Console.WriteLine("");
-                            Console.WriteLine("You have, $" + playerMoney + ".");
-                            Console.WriteLine("");
+                            Console.WriteLine("\nYou have, $" + playerMoney + ".\n");
                             Console.WriteLine("Do you want to buy this item? Yes or No. [Y] [N]");
                             _playerInteraction = Console.ReadLine();
                             playerInteraction = _playerInteraction.ToUpper();
 
                             for (int l = 0; l < 2; l++)
                             {
-
+                                
                                 //Thiys is for checking if the player has input Yes or No.
-                                if (playerInteraction == "Y" && playerMoney >= shopKeeperInventory.inventory[l].Cost)
+                                if (playerInteraction == "Y" && playerMoney >= shopKeeperInventory.inventory[playerValue].Cost)
                                 {
+                                    //This is to decrease the playerMoney by the shopKeepers Item whilst 
+                                    playerMoney -= shopKeeperInventory.inventory[playerValue].Cost;
+                                    shopKeeperMoney += shopKeeperInventory.inventory[playerValue].Cost;
+                                    Console.WriteLine($"\nCongratulations, you have received the {shopKeeperInventory.inventory[playerValue].Name} " +
+                                        $"and now have {playerMoney} left.\n");
 
-                                    //If this is activated, use the calculation to activate the cost of the item and minus it from the players money value
-                                    //Program.MoneyCalculator(playerMoney, shopKeeperInventory.inventory[l].Cost, shopKeeperMoney);
+                                    Program buyerArrayChange = new Program();
+                                    buyerArrayChange.MovingArrays(ref shopKeeperInventory.inventory, ref playerInventory.inventory, playerValue);
 
-                                    newPlayerMoney = playerMoney - shopKeeperInventory.inventory[l].Cost;
-                                    newShopKeeperMoney = shopKeeperMoney + shopKeeperInventory.inventory[l].Cost;
-
-
-                                    Console.WriteLine($"Congratulations, you have received the {shopKeeperInventory.inventory[l].Name} " +
-                                        $"and now have {newPlayerMoney} left.");
-                                    Console.WriteLine("Would you like to continue? Yes or No. [Y] [N]");
-                                    _playerInteraction = Console.ReadLine();
-                                    playerInteraction = _playerInteraction.ToUpper();
                                     for (int m = 0; m < 1; m++)
                                     {
-                                        if (playerInteraction == "Y")
-                                        {
-                                            //Write a statement here to update the two arrays with the new interaction
-                                            newPlayerMoney = playerMoney; //I need to ask about why the money is not updating globally.
-                                            newShopKeeperMoney = shopKeeperMoney; //This is updating the shops money from the transaction.
-                                            Program startAgain = new Program();
-                                            startAgain.beginningMessage();
-                                            i = 0;
-                                        }
-                                        else if (playerInteraction == "N")
-                                        {
-                                            //If the player presses N exit program.
-                                            System.Environment.Exit(0);
-                                        }
-
-                                        else
-                                        {
-                                            Console.WriteLine("Sorry could you repeat that? Y or N.");
-                                            _playerInteraction = Console.ReadLine();
-                                            playerInteraction = _playerInteraction.ToUpper();
-                                            m = 0;
-                                        }
+                                        Program continueShop = new Program();
+                                        continueShop.EndStatement();
+                                        m = 0;
                                     }
                                 }
                                 else if (playerInteraction == "Y" && playerMoney < shopKeeperInventory.inventory[l].Cost)
                                 {
-                                    Console.WriteLine($"Sorry you do not have enough money for {shopKeeperInventory.inventory[l].Name}.");
-                                    Console.WriteLine($"You have {playerMoney} left, ");
-                                }
+                                    Console.WriteLine($"\nSorry you do not have enough money for {shopKeeperInventory.inventory[l].Name}.");
+                                    Console.WriteLine($"\nYou have {playerMoney} left, ");
 
+                                    Program noStatement = new Program();
+                                    noStatement.EndStatement();
+                                }
 
                                 else if (playerInteraction == "N")
                                 {
-                                    //This will return the players interaction back to the beginning of the begin message loop.
-                                    Console.WriteLine("Would you like to continue looking around in the shop? [Y] [N]");
-                                    _playerInteraction = Console.ReadLine();
-                                    playerInteraction = _playerInteraction.ToUpper();
-
-                                    if (playerInteraction == "Y")
-                                    {
-                                        Program p = new Program();
-                                        p.beginningMessage();
-                                        i = 0;
-                                        //This is to call the function beginningmessage again
-
-                                    }
-
-                                    else if (playerInteraction == "N")
-                                    {
-                                        System.Environment.Exit(0);
-                                        //This is to exit the console and the program when the player wants to exit.
-                                    }
+                                    Program nostatement = new Program();
+                                    nostatement.EndStatement();
+                                    i = 0;
 
                                 }
 
                                 else
                                 {
-                                    Console.WriteLine("");
-                                    Console.WriteLine("");
-                                    Console.WriteLine("Stop wasting my time, tell me Y or N if you want something!");
+                                    Console.WriteLine("\nStop wasting my time, tell me Y or N if you want something!\n");
                                     //In case the player presses the wrong key or something has gone wrong.
                                     l = 0;
                                     _playerInteraction = Console.ReadLine();
@@ -302,8 +254,9 @@ namespace Project_Assessment
                         }
                         else
                         {
-                            Console.WriteLine("Sorry, you have wasted my time helping you, please leave!!!");
-                            System.Environment.Exit(0);
+                            Console.WriteLine("\nSorry, you have wasted my time helping you, please leave!!!\n");
+                            Program redoBegin = new Program();
+                            redoBegin.beginningMessage();
 
                         }
 
@@ -311,38 +264,26 @@ namespace Project_Assessment
                     //If the player presses sell, use this statement.
                     if(playerInteraction == "S")
                     {
-                        Console.WriteLine("You have:");
+                        Console.WriteLine("\nYou have:");
                         for (int n = 0; n < playerInventory.InventoryLength; n++)
                         {
                             if (playerInventory.inventory[n] != null)
                             {
 
                                 //If there is something in the inventory, print it to the screen.
-                                Console.WriteLine($"{n}: {playerInventory.inventory[n].Name}");
+                                Console.WriteLine($"{n}: {playerInventory.inventory[n].Name} which is worth {playerInventory.inventory[n].Cost} coins.");
                             }
 
                             //This is for checking if theres nothing in the array.
                             else if (playerInventory.inventory == null)
                             {
-                                Console.WriteLine("Sorry, you have nothing to offer me, would you like to look around? [Y] [N]");
-                                _playerInteraction = Console.ReadLine();
-                                playerInteraction = _playerInteraction.ToUpper();
-                                if (playerInteraction == "Y")
-                                {
-                                    Program p = new Program();
-                                    p.beginningMessage();
-                                    i = 0;
-                                }
-                                else if (playerInteraction == "N")
-                                {
-                                    System.Environment.Exit(0);
-                                }
+                                Console.WriteLine("\nSorry, you have nothing to offer me.");
+                                Program endStatement = new Program();
+                                endStatement.EndStatement();
                             }
 
                         }
-                        Console.WriteLine("");
-                        Console.WriteLine("");
-                        Console.WriteLine("Which item would you like to sell? [Write the number next to the item.]");
+                        Console.WriteLine("\nWhich item would you like to sell? [Write the number next to the item.]");
                         _playerInteraction = Console.ReadLine();
                         playerInteraction = _playerInteraction.ToUpper();
 
@@ -351,49 +292,29 @@ namespace Project_Assessment
                         if (playerInventory.inventory[playerSellValue] != null)
                         {
                             playerInventory.inventory[playerSellValue].Print();
-                            Console.WriteLine("");
-                            Console.WriteLine("");
-
                             for (int o = 0; o < 1; o++)
                             {
-                                Console.WriteLine($"I like the looks of this item, could i take it? You will get " +
-                                $"{playerInventory.inventory[o].Cost} in return. Yes or No [Y] [N].");
+                                Console.WriteLine($"\nI like the looks of this item, could i take it? You will get " +
+                                $"{playerInventory.inventory[o].Cost} in return. Yes or No [Y] [N].\n");
                                 _playerInteraction = Console.ReadLine();
                                 playerInteraction = _playerInteraction.ToUpper();
                                 for (int p = 0; p < 1; p++)
                                 {
                                     if (playerInteraction == "Y")
                                     {
-                                        newPlayerMoney = playerMoney + playerInventory.inventory[o].Cost;
-                                        newShopKeeperMoney = shopKeeperMoney - playerInventory.inventory[o].Cost;
-                                        Console.WriteLine("");
-                                        Console.WriteLine("");
-                                        Console.WriteLine($"Thank you, this is your new balence: {newPlayerMoney}.");
-                                        Console.WriteLine("Would you like to continue? [Y] [N]");
-                                        if (playerInteraction == "Y")
-                                        {
-                                            newPlayerMoney = playerMoney;
-                                            newShopKeeperMoney = shopKeeperMoney;
-                                            Program startAgain = new Program();
-                                            startAgain.beginningMessage();
-                                            i = 0;
-                                        }
-                                        else if (playerInteraction == "N")
-                                        {
-                                            Console.WriteLine("Goodbye.");
-                                            System.Environment.Exit(0);
-                                        }
+                                        playerMoney += playerInventory.inventory[playerSellValue].Cost;
+                                        shopKeeperMoney -= playerInventory.inventory[playerSellValue].Cost;
+                                        Console.WriteLine($"\nThank you, this is your new balence: {playerMoney}.");
+                                        Program buyerArrayChange = new Program();
+                                        buyerArrayChange.MovingArrays(ref playerInventory.inventory, ref shopKeeperInventory.inventory, playerSellValue);
 
-                                        else
-                                        {
-                                            Console.WriteLine("");
-                                            Console.WriteLine("Can you repeat that? [Y] [N]");
-                                            _playerInteraction = Console.ReadLine();
-                                            playerInteraction = _playerInteraction.ToUpper();
-                                            p = 0;
-
-                                        }
-
+                                        Program endStatement = new Program();
+                                        endStatement.EndStatement();
+                                    }
+                                    else if (playerInteraction == "N")
+                                    {
+                                        Program noStatement = new Program();
+                                        noStatement.EndStatement();
                                     }
                                 }
 
@@ -403,15 +324,13 @@ namespace Project_Assessment
                         }
 
                     }
-                    else if(playerInteraction != "S" || playerInteraction != "B")
+                    else
                     {
                         //This is a incase funtion if the player does not write the correct word or letter.
-                        Console.WriteLine("What did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
+                        Console.WriteLine("\nWhat did you say? Buy [B] or Sell [S]? Press the letter and then enter.");
                         i = 0;
                     }
                 }
-
-
                 //The next statement is for the reading of whatever is in the text file.
                 StreamReader optionsAvailable = new
                     StreamReader("ShopKeeper.txt");
@@ -423,11 +342,8 @@ namespace Project_Assessment
                 //    Console.WriteLine(line);
                 //}
                 //optionsAvailable.Close();
-
             }
-
-
-            }
+        }
     }
 }
 
