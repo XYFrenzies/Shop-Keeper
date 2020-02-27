@@ -330,9 +330,9 @@ namespace Project_Assessment
                                         m = 0;
                                     }
                                 }
-                                else if (playerInteraction == "Y" && playerMoney < shopKeeperInventory.inventory[l].Cost)
+                                else if (playerInteraction == "Y" && playerMoney < shopKeeperInventory.inventory[playerValue].Cost)
                                 {
-                                    Console.WriteLine($"\nSorry you do not have enough money for {shopKeeperInventory.inventory[l].Name}.");
+                                    Console.WriteLine($"\nSorry you do not have enough money for {shopKeeperInventory.inventory[playerValue].Name}.");
                                     Console.WriteLine($"\nYou have {playerMoney} left, ");
 
                                     Program noStatement = new Program();
