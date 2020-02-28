@@ -50,10 +50,10 @@ namespace Project_Assessment
                 "If your needing a high enough level for some of the upcoming fights this potion should do the trick.");
 
 
-            //This is commented out to restart the text files to the file. This is along with MovingArrayTofile.
-            //playerInventory.AddInventory(crossBow, holyPants, theEnchantedPotion);
-            //shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe, holyHeadGear, holyChestPeice, godAlmightyPotion, deadlyPoisonOfTheWest);
 
+            playerInventory.AddInventory(crossBow, holyPants, theEnchantedPotion);
+            shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe, holyHeadGear, holyChestPeice, godAlmightyPotion, deadlyPoisonOfTheWest);
+            //This is commented out to restart the text files to the file. This is along with MovingArrayTofile.
 
             LoadingInventoryFromFile("ShopKeeper.txt", ref shopKeeperInventory);
             LoadingInventoryFromFile("Player.txt", ref playerInventory);
@@ -238,62 +238,65 @@ namespace Project_Assessment
         static public void LoadingInventoryFromFile(string newFileName, ref Inventory inv)
         {
             //This is the function for loading the text file onto a array and rewriting the default one every time you open the program.
+            if (File.Exists(newFileName))
+            {
+                //Withing this feature, the called variable newFileName is defined as the streamReader called reader.
+                StreamReader reader = new StreamReader(newFileName);
+                while (reader.EndOfStream == false)
+                {//Whilst the reader of the streamReader newFileName is not at the end of the text file.
+                    string reading = reader.ReadLine();//This saves the line called reading.
+                    string[] args = reading.Split('|');//Splits the variables using the commers.
 
-            //Withing this feature, the called variable newFileName is defined as the streamReader called reader.
-            StreamReader reader = new StreamReader(newFileName);
-            while (reader.EndOfStream == false)
-            {//Whilst the reader of the streamReader newFileName is not at the end of the text file.
-                string reading = reader.ReadLine();//This saves the line called reading.
-                string[] args = reading.Split('|');//Splits the variables using the commers.
+                    string projectDefiner = args[0];//Grabs the file location of the different items so that it can be defined within a case statement.
 
-                string projectDefiner = args[0];//Grabs the file location of the different items so that it can be defined within a case statement.
-
-                switch (projectDefiner)
-                {
-                    case "Project_Assessment.Weapon"://If the projectDefiner is named Project_Assessment.Weapon...
-                        //Converting a string to a int.
-                        int convertToIntWeightW = Int32.Parse(args[2]);//Converting the weapon weight to a int from string.
-                        int convertToIntCostW = Int32.Parse(args[3]);//Converting the weapon Cost to a int from string.
-                        int convertToIntRangeW = Int32.Parse(args[4]);//Converting the weapon Range to a int from string.
-                        int convertToIntDamageW = Int32.Parse(args[5]);//Converting the weapon Damage to a int from string.
-                        int convertToIntAttackSpeedW = Int32.Parse(args[6]);//Converting the weapon AttackSpeed to a int from string.
-
-
-                        //For weapons, the categories are displayed as Name, Weight, Cost, Range, Damage, AttackSpeed.
-                        Item tempWeap = new Weapon(args[1], convertToIntWeightW, convertToIntCostW, convertToIntRangeW, convertToIntDamageW, convertToIntAttackSpeedW);
-
-                        inv.AddInventory(tempWeap);
-                        break;//Leaves the array.
-
-                    case "Project_Assessment.Armour"://If the projectDefiner is named Project_Assessment.Armour...
-                        int convertToIntWeightA = Int32.Parse(args[2]);//Converting the Armour weight to a int from string.
-                        int convertToIntCostA = Int32.Parse(args[3]);//Converting the Armour Cost to a int from string.
-                        int convertToIntHealthA = Int32.Parse(args[5]);//Converting the Armour Health to a int from string.
+                    switch (projectDefiner)
+                    {
+                        case "Project_Assessment.Weapon"://If the projectDefiner is named Project_Assessment.Weapon...
+                                                         //Converting a string to a int.
+                            int convertToIntWeightW = Int32.Parse(args[2]);//Converting the weapon weight to a int from string.
+                            int convertToIntCostW = Int32.Parse(args[3]);//Converting the weapon Cost to a int from string.
+                            int convertToIntRangeW = Int32.Parse(args[4]);//Converting the weapon Range to a int from string.
+                            int convertToIntDamageW = Int32.Parse(args[5]);//Converting the weapon Damage to a int from string.
+                            int convertToIntAttackSpeedW = Int32.Parse(args[6]);//Converting the weapon AttackSpeed to a int from string.
 
 
-                        //For Armour, the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
-                        Item tempArmour = new Armour(args[1], convertToIntWeightA, convertToIntCostA, args[4], convertToIntHealthA, args[6]);
-                        inv.AddInventory(tempArmour);
-                        break;//Leaves the array.
+                            //For weapons, the categories are displayed as Name, Weight, Cost, Range, Damage, AttackSpeed.
+                            Item tempWeap = new Weapon(args[1], convertToIntWeightW, convertToIntCostW, convertToIntRangeW, convertToIntDamageW, convertToIntAttackSpeedW);
 
-                    case "Project_Assessment.Potion"://If the projectDefiner is named Project_Assessment.Potion...
-                        //For Potions, the categories are displayed as Name, Weight, Cost, Type of Potion, Stat changes, Description.
-                        int convertToIntWeightP = Int32.Parse(args[2]);//Converting the Potion weight to a int from string.
-                        int convertToIntCostP = Int32.Parse(args[3]);//Converting the Potion Cost to a int from string.
-                        int convertToIntIBOP = Int32.Parse(args[5]);//Converting the Potion increased bonuses to a int from string.
+                            inv.AddInventory(tempWeap);
+                            break;//Leaves the array.
 
-                        //For Armour, the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
-                        Item tempPotion = new Potion(args[1], convertToIntWeightP, convertToIntCostP, args[4], convertToIntIBOP, args[6]);
-                        inv.AddInventory(tempPotion);
-                        break;//Leaves the array.
+                        case "Project_Assessment.Armour"://If the projectDefiner is named Project_Assessment.Armour...
+                            int convertToIntWeightA = Int32.Parse(args[2]);//Converting the Armour weight to a int from string.
+                            int convertToIntCostA = Int32.Parse(args[3]);//Converting the Armour Cost to a int from string.
+                            int convertToIntHealthA = Int32.Parse(args[5]);//Converting the Armour Health to a int from string.
 
-                    default://If neither of the case statements are true.
-                        break;//Leaves the array.
+
+                            //For Armour, the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
+                            Item tempArmour = new Armour(args[1], convertToIntWeightA, convertToIntCostA, args[4], convertToIntHealthA, args[6]);
+                            inv.AddInventory(tempArmour);
+                            break;//Leaves the array.
+
+                        case "Project_Assessment.Potion"://If the projectDefiner is named Project_Assessment.Potion...
+                                                         //For Potions, the categories are displayed as Name, Weight, Cost, Type of Potion, Stat changes, Description.
+                            int convertToIntWeightP = Int32.Parse(args[2]);//Converting the Potion weight to a int from string.
+                            int convertToIntCostP = Int32.Parse(args[3]);//Converting the Potion Cost to a int from string.
+                            int convertToIntIBOP = Int32.Parse(args[5]);//Converting the Potion increased bonuses to a int from string.
+
+                            //For Armour, the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
+                            Item tempPotion = new Potion(args[1], convertToIntWeightP, convertToIntCostP, args[4], convertToIntIBOP, args[6]);
+                            inv.AddInventory(tempPotion);
+                            break;//Leaves the array.
+
+                        default://If neither of the case statements are true.
+                            break;//Leaves the array.
+                    }
+
                 }
-
+                reader.Dispose();
+                reader.Close();
             }
-            reader.Dispose();
-            reader.Close();
+
         }
 
         static public void beginningMessage()
@@ -348,16 +351,16 @@ namespace Project_Assessment
                             {//This is a repetitive loop for when the player wants to buy the item or not.
 
 
-                                if (playerInteraction == "Y" && playerMoney >= shopKeeperInventory.inventory[l].Cost)
+                                if (playerInteraction == "Y" && playerMoney >= shopKeeperInventory.inventory[playerValue].Cost)
                                 {//This is checking if the player has written yes and that they have enough money to afford the cost of the item.
                                     //This is to decrease the playerMoney by the shopKeepers Item whilst 
-                                    playerMoney -= shopKeeperInventory.inventory[l].Cost;//This is maths to minus the players money from the shopkeepers items value.
-                                    shopKeeperMoney += shopKeeperInventory.inventory[l].Cost;//This is to add the shopKeepers money from the profits of the items value.
-                                    Console.WriteLine($"\nCongratulations, you have received the {shopKeeperInventory.inventory[l].Name} " +
+                                    playerMoney -= shopKeeperInventory.inventory[playerValue].Cost;//This is maths to minus the players money from the shopkeepers items value.
+                                    shopKeeperMoney += shopKeeperInventory.inventory[playerValue].Cost;//This is to add the shopKeepers money from the profits of the items value.
+                                    Console.WriteLine($"\nCongratulations, you have received the {shopKeeperInventory.inventory[playerValue].Name} " +
                                         $"and now have {playerMoney} left.\n");//Displaying to the player that they have purchased the item.
 
                                     //This is creating buyerArrayChange to a definition of calling a function.
-                                    MovingArrays(ref shopKeeperInventory.inventory, ref playerInventory.inventory, l);
+                                    MovingArrays(ref shopKeeperInventory.inventory, ref playerInventory.inventory, playerValue);
 
                                     //This is called when a transaction occurs. 
                                     //Calling upon the playersinventory and the shopkeepers inventory whilst getting the vlaue of where the item was.

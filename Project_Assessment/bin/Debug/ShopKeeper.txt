@@ -1,6 +1,0 @@
-Project_Assessment.Weapon|Long Sword Of Destiny|20|900|20|100|1
-Project_Assessment.Weapon|The Last DeathBringer|25|1000|3|150|2
-Project_Assessment.Armour|The Holy Headset|15|500|HeadGear|250|CrossBow
-Project_Assessment.Armour|The Holy ChestGuard|25|900|ChestPeice|500|CrossBow
-Project_Assessment.Potion|God Almighty Potion|1|300|gives you health of about |200|Its so strong that it would only be used in a life or death situation.
-Project_Assessment.Potion|Deadly Poison of The West|2|1000|deals increasing amounts of damage over 5 seconds, adding x2 damage each time|20|If you want a deadly toxin that can pressure anyone into fleeing this is the potion for you.
