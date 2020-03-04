@@ -1,0 +1,4 @@
+Project_Assessment.Weapon|Enchanted CrossBow of Truth|10|1000|500|70|1
+Project_Assessment.Armour|The Holy Leggings|10|600|Leggings|400|CrossBow
+Project_Assessment.Potion|The Enchanted Potion of the Neverworlds|1|2000|It increases the level of the player by|1|If your needing a high enough level for some of the upcoming fights this potion should do the trick.
+Project_Assessment.Potion|Deadly Poison of The West|2|1000|deals increasing amounts of damage over 5 seconds, adding x2 damage each time|20|If you want a deadly toxin that can pressure anyone into fleeing this is the potion for you.

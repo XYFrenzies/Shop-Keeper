@@ -10,6 +10,27 @@ namespace Project_Assessment
 {
     class Program
     {
+        public Weapon longSwordOfDestiny = new Weapon("Long Sword Of Destiny", 20, 900, 20, 100, 1);
+        public Weapon deathbringerAxe = new Weapon("The Last DeathBringer", 25, 1000, 3, 150, 2);
+        public Weapon crossBow = new Weapon("Enchanted CrossBow of Truth", 10, 1000, 500, 70, 1);
+
+        // For armour the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
+        public Armour holyHeadGear = new Armour("The Holy Headset", 15, 500, "HeadGear", 250, "CrossBow");
+        public Armour holyChestPeice = new Armour("The Holy ChestGuard", 25, 900, "ChestPeice", 500, "CrossBow");
+        public Armour holyPants = new Armour("The Holy Leggings", 10, 600, "Leggings", 400, "CrossBow");
+
+        //For Potions, the categories are displayed as Name, Weight, Cost, Type of Potion, Stat changes, Description.
+        public Potion godAlmightyPotion = new Potion("God Almighty Potion", 1, 300, "gives you health of about ", 200,
+            "Its so strong that it would only be used in a life or death situation.");
+        public Potion deadlyPoisonOfTheWest = new Potion("Deadly Poison of The West", 2, 1000,
+            "deals increasing amounts of damage over 5 seconds, adding x2 damage each time", 20,
+            "If you want a deadly toxin that can pressure anyone into fleeing this is the potion for you.");
+        public Potion theEnchantedPotion = new Potion("The Enchanted Potion of the Neverworlds", 1, 2000,
+            "It increases the level of the player by", 1,
+            "If your needing a high enough level for some of the upcoming fights this potion should do the trick.");
+
+
+
         //This is split into two different arrays. One is for the shopkeeper, the other is for the player.
         //With reference to the inventory class, its the amount of space that the individual can hold.
         static public Inventory playerInventory = new Inventory(20); //This is the players inventory space defult at 20.
@@ -30,38 +51,39 @@ namespace Project_Assessment
             //For weapons, the categories are displayed as Name, Weight, Cost, Range, Damage, AttackSpeed.
 
 
-            Weapon longSwordOfDestiny = new Weapon("Long Sword Of Destiny", 20, 900, 20, 100, 1);
-            Weapon deathbringerAxe = new Weapon("The Last DeathBringer", 25, 1000, 3, 150, 2);
-            Weapon crossBow = new Weapon("Enchanted CrossBow of Truth", 10, 1000, 500, 70, 1);
-
-            // For armour the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
-            Armour holyHeadGear = new Armour("The Holy Headset", 15, 500, "HeadGear", 250, "CrossBow");
-            Armour holyChestPeice = new Armour("The Holy ChestGuard", 25, 900, "ChestPeice", 500, "CrossBow");
-            Armour holyPants = new Armour("The Holy Leggings", 10, 600, "Leggings", 400, "CrossBow");
-
-            //For Potions, the categories are displayed as Name, Weight, Cost, Type of Potion, Stat changes, Description.
-            Potion godAlmightyPotion = new Potion("God Almighty Potion", 1, 300, "gives you health of about ", 200,
-                "Its so strong that it would only be used in a life or death situation.");
-            Potion deadlyPoisonOfTheWest = new Potion("Deadly Poison of The West", 2, 1000,
-                "deals increasing amounts of damage over 5 seconds, adding x2 damage each time", 20,
-                "If you want a deadly toxin that can pressure anyone into fleeing this is the potion for you.");
-            Potion theEnchantedPotion = new Potion("The Enchanted Potion of the Neverworlds", 1, 2000,
-                "It increases the level of the player by", 1,
-                "If your needing a high enough level for some of the upcoming fights this potion should do the trick.");
 
 
-
-            playerInventory.AddInventory(crossBow, holyPants, theEnchantedPotion);
-            shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe, holyHeadGear, holyChestPeice, godAlmightyPotion, deadlyPoisonOfTheWest);
-            //This is commented out to restart the text files to the file. This is along with MovingArrayTofile.
-
-            LoadingInventoryFromFile("ShopKeeper.txt", ref shopKeeperInventory);
-            LoadingInventoryFromFile("Player.txt", ref playerInventory);
-
-
+            //This is commented out to restart the text files to the file. 
+            Program fileExists = new Program();
+            fileExists.FileExistStatement();
 
             beginningMessage();
             //This naturally begins the beginningmessage function.
+        }
+
+        //This function is used so that it doesnt have to be put into the main program directly but rather indirectly.
+        public void FileExistStatement()
+        {
+            //This checks if the shopKeeper and player text's exist. If so execute the program.
+            if(File.Exists("ShopKeeper.txt") && File.Exists("Player.txt"))
+            {
+                //This will load the files of shopKeeper and player text via thr loadingInventoryFromFile function.
+                LoadingInventoryFromFile("ShopKeeper.txt", ref shopKeeperInventory);
+                LoadingInventoryFromFile("Player.txt", ref playerInventory);
+
+            }
+            //This check executes if neither of the two files exist. 
+            else if(!File.Exists("ShopKeeper.txt") && !File.Exists("Player.txt"))
+            {
+                //This will add these items to the inventory of the player and shopKeeper.
+                playerInventory.AddInventory(crossBow, holyPants, theEnchantedPotion);
+                shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe, holyHeadGear, holyChestPeice, godAlmightyPotion, deadlyPoisonOfTheWest);
+            }
+            else    
+            {
+                //Incase neither of these statements work, it means that the player or the shopKeeper text file didnt load properly.
+                Console.WriteLine("One of the two text files didnt load properly.");
+            }
         }
 
         public void EndStatement()
@@ -170,15 +192,14 @@ namespace Project_Assessment
                     shopKeeperWriter.WriteLine($"{theItemTypeSK}|{theNameSK}|{theWeightSK}|{theCostSK}|{a1}|{a2}|{a3}");
                 }
             }
-            //Closes the writer so that it stops writing.
+            //Closes the writer so that it stops writing. Also flushes it to the text file before it closes the program.
             shopKeeperWriter.Flush();
             shopKeeperWriter.Close();
 
             //This is to save the array of player items onto a text file called player.txt
             //If the player text doesnt exist...
             //Create a new file called player.txt
-            StreamWriter playerWriter;
-            playerWriter = new StreamWriter("Player.txt");
+            StreamWriter playerWriter = new StreamWriter("Player.txt");
 
             for (int j = 0; j < playerInventory.InventoryLength; j++)
             {//THis is a loop of the players inventory length and the items within that array.
@@ -224,7 +245,7 @@ namespace Project_Assessment
                 }
 
             }
-            //Closes the writer so that it stops writing.
+            //Closes the writer so that it stops writing. Also flushes it to the text file before it closes the program.
             playerWriter.Flush();
             playerWriter.Close();
 
