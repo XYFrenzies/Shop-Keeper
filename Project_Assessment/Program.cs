@@ -603,7 +603,7 @@ namespace Project_Assessment
                                 int newAttackSpeed = playerValueAS;
 
                                 Weapon newWeapon = new Weapon(newName, newWeight, newCost, newRange, newDamage, newAttackSpeed);
-                                shopKeeperInventory.AddInventory(newWeapon);
+                                shopKeeperSecretInventory.AddInventory(newWeapon);
 
                                 break;
 
@@ -625,7 +625,7 @@ namespace Project_Assessment
                                 string newResistence = _playerInteraction;
 
                                 Armour newArmour = new Armour(newName, newWeight, newCost, newTypeOfArmour, newHealth, newResistence);
-                                shopKeeperInventory.AddInventory(newArmour);
+                                shopKeeperSecretInventory.AddInventory(newArmour);
 
                                 break;
 
@@ -646,7 +646,7 @@ namespace Project_Assessment
                                 string newDescription = _playerInteraction;
 
                                 Armour newPotion = new Armour(newName, newWeight, newCost, newTypeOfPotion, newPStatChange, newDescription);
-                                shopKeeperInventory.AddInventory(newPotion);
+                                shopKeeperSecretInventory.AddInventory(newPotion);
 
                                 break;
                             default:
