@@ -10,7 +10,7 @@ namespace Project_Assessment
     {
 
         public override void Print()
-        {
+        {//This is a function that overrides a dialogue within the program beginning message.
             Console.WriteLine($"{Name} is a " + armourType + " that has " + armourHealth + " extra health.");
             Console.WriteLine($"It weighs about {Weight} Kg's and can resist the {ArmourResistence}");
             Console.WriteLine($"It costs about {Cost} coins.");

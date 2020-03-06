@@ -20,7 +20,6 @@ namespace Project_Assessment
             inventory = new Item[sizeOfInventory];
             //This is a reference for the size of the inventory
         }
-
         public int[] SearchInventory(string itemToSearch)
         {
             //Iterate over inventory and find contains of itemToSearch

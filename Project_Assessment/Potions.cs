@@ -17,12 +17,11 @@ namespace Project_Assessment
 
         public override void Print()
         {
-            //This is used when called upon by the main program to overrride a function.
+            //This is a function that overrides a dialogue within the program beginning message.
             Console.WriteLine($"{Name} is a Potion that weighs about {Weight} Kg's.");
             Console.WriteLine($"This potion {TypeOfPotion} {ChangedStatsOfPotion}.");
             Console.WriteLine($"{PotionDescription}.");
             Console.WriteLine($"The cost of this Potion is {Cost} coins.");
-
         }
 
 
