@@ -46,6 +46,9 @@ namespace Project_Assessment
         static public int playerMoney = 1000; //Default amounts of money that can be spent.
         static public int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.        
 
+        static protected int counting = 0;
+
+
         //This is the main function of the program.
         static public void Main()
         {
@@ -72,7 +75,7 @@ namespace Project_Assessment
             else if(!File.Exists("ShopKeeper.txt") && !File.Exists("Player.txt") && !File.Exists("SecretShopKeeper.txt"))
             {
                 //This will add these items to the inventory of the player and shopKeeper.
-                playerInventory.AddInventory(); //crossBow, holyPants, theEnchantedPotion
+                playerInventory.AddInventory(crossBow, holyPants, theEnchantedPotion);
                 shopKeeperInventory.AddInventory(longSwordOfDestiny, deathbringerAxe, holyHeadGear, holyChestPeice, godAlmightyPotion, deadlyPoisonOfTheWest);
                 shopKeeperSecretInventory.AddInventory(goldenGloves, holyShoes);
 
@@ -385,6 +388,21 @@ namespace Project_Assessment
             }
 
         }
+
+        static public int SearchingInventory(ref int count)
+        {
+            count = 0;// reverting count back to 0.
+            for (int i = 0; i < playerInventory.InventoryLength; i++)
+            {
+                if (playerInventory.inventory[i] != null)
+                {
+                    count += 1;//Adds to the count for every item in the array.
+                }
+            }
+            return count;
+        }
+
+
         //Beginningmessage is where all the dialouge and the movement between the different functions occur. This is referenced in the main function to start.
         static public void beginningMessage()
         {
@@ -405,22 +423,29 @@ namespace Project_Assessment
                     //If they player presses buy, use this statement.
                     if (playerInteraction == "B")
                     {//If the player presses b or B.
-
-                        if (shopKeeperInventory == null)
+                        //This is for checking if theres nothing in the array.
+                        SearchingInventory(ref counting);
+                        if (counting == 0)
                         {
                             Console.WriteLine("\nSorry, I have nothing to sell you.");
                             Program endStatement = new Program();
                             endStatement.EndStatement();
                         }
-                        for (int k = 0; k < shopKeeperInventory.InventoryLength; k++)
-                        {//This is checking through the shopKeepers inventory length of the array.
-                            if (shopKeeperInventory.inventory[k] != null)
-                            {//If the shopKeeper does have stuff in stock.
-                             //If there is something in the inventory, print it to the screen.
-                                Console.WriteLine($"{k}: {shopKeeperInventory.inventory[k].Name} which cost {shopKeeperInventory.inventory[k].Cost} coins.");
-                                //This is printing for every item name, a number before it and the cost of it.
+                        else
+                        {
+                            for (int k = 0; k < shopKeeperInventory.InventoryLength; k++)
+                            {//This is checking through the shopKeepers inventory length of the array.
+
+                                if (shopKeeperInventory.inventory[k] != null)
+                                {//If the shopKeeper does have stuff in stock.
+                                 //If there is something in the inventory, print it to the screen.
+                                    Console.WriteLine($"{k}: {shopKeeperInventory.inventory[k].Name} which cost {shopKeeperInventory.inventory[k].Cost} coins.");
+                                    //This is printing for every item name, a number before it and the cost of it.
+                                }
+
                             }
                         }
+                        
                         //This is to check if the player wants to buy the item by the item number before it.
                         Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");
                         
@@ -508,29 +533,28 @@ namespace Project_Assessment
                     //If the player presses sell, use this statement.
                     if (playerInteraction == "S")
                     {
+                        SearchingInventory(ref counting);//Uses the function seachinginventory to find the amount of space left in the inventory.
                         for (int r = 0; r < 2; r++)
-                        {
-                            bool isInventoryEmpty = false;
-                            if (playerInventory.InventoryLength == 0)
-                            {
-                                isInventoryEmpty = true;
-                            }
-                            //This is for checking if theres nothing in the array.
-                            if (isInventoryEmpty == true)
+                        {//This is for checking if theres nothing in the array.
+                            if (counting == 0)
                             {
                                 Console.WriteLine("\nSorry, you have nothing to offer me.");
                                 Program endStatement = new Program();
                                 endStatement.EndStatement();
                             }
-                            Console.WriteLine("\nYou have:");
-                            for (int n = 0; n < playerInventory.InventoryLength; n++)
-                            {//Checking the length of the array of the inventory to see if there is something in it.
-                                if (playerInventory.inventory[n] != null)
-                                {
-                                    //If there is something in the inventory, print it to the screen.
-                                    Console.WriteLine($"{n}: {playerInventory.inventory[n].Name} which is worth {playerInventory.inventory[n].Cost} coins.");
-                                }
+                            else
+                            {
+                                Console.WriteLine("\nYou have:");
+                                for (int n = 0; n < playerInventory.InventoryLength; n++)
+                                {//Checking the length of the array of the inventory to see if there is something in it.
+                                    if (playerInventory.inventory[n] != null)
+                                    {
+                                        //If there is something in the inventory, print it to the screen.
+                                        Console.WriteLine($"{n}: {playerInventory.inventory[n].Name} which is worth {playerInventory.inventory[n].Cost} coins.");
+                                    }
+                                    //This is for checking if theres nothing in the array.
 
+                                }
                             }
                             Console.WriteLine("\nWhich item would you like to sell? [Write the number next to the item.]");
 
@@ -710,24 +734,31 @@ namespace Project_Assessment
                             if (playerInteraction == "FORHONOR")
                             {//If the player says forhonor without any spaces. This statement will continue.
                                 Console.Clear();//Clears the console.
-                                Console.WriteLine("I agree, now down to business.\n");
-                                Console.WriteLine("These are my secret stash that I have available.\n");
-                                Console.WriteLine("\n These are what I have available:");//Says to the player what is available to them.
+
+                                SearchingInventory(ref counting);
                                 //This is for checking if theres nothing in the array.
-                                if (shopKeeperSecretInventory.inventory == null)
+                                if (counting == 0)
                                 {
                                     Console.WriteLine("\nSorry, I have nothing to sell you.");
                                     Program endStatement = new Program();
                                     endStatement.EndStatement();
                                 }
-                                for (int n = 0; n < shopKeeperSecretInventory.InventoryLength; n++)
+                                else 
                                 {
-                                    if (shopKeeperSecretInventory.inventory[n] != null)
+                                    Console.WriteLine("I agree, now down to business.\n");
+                                    Console.WriteLine("These are my secret stash that I have available.\n");
+                                    Console.WriteLine("\n These are what I have available:");//Says to the player what is available to them.
+
+                                    for (int n = 0; n < shopKeeperSecretInventory.InventoryLength; n++)
                                     {
-                                        //If there is something in the inventory, print it to the screen.
-                                        Console.WriteLine($"{n}: {shopKeeperSecretInventory.inventory[n].Name} which is worth {shopKeeperSecretInventory.inventory[n].Cost} coins.");
+                                        if (shopKeeperSecretInventory.inventory[n] != null)
+                                        {
+                                            //If there is something in the inventory, print it to the screen.
+                                            Console.WriteLine($"{n}: {shopKeeperSecretInventory.inventory[n].Name} which is worth {shopKeeperSecretInventory.inventory[n].Cost} coins.");
+                                        }
                                     }
-                                }                           
+                                }
+                          
                                 Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");                                                               
 
                                 for (int d = 0; d < 2; d++)

@@ -20,32 +20,39 @@ namespace Project_Assessment
             inventory = new Item[sizeOfInventory];
             //This is a reference for the size of the inventory
         }
-        public int[] SearchInventory(string itemToSearch)
-        {
-            //Iterate over inventory and find contains of itemToSearch
-            //int[] results = new int[20];
-            List<int> results = new List<int>();
 
-            //search stuff magic
-            for (int i = 0; i < inventory.Length; i++)
-            {
-                if (inventory[i] != null)
-                {
-                    //The next line is checking, if the inventory has an item within it that contains a keyword "name"
-                    //Execute the code.
-                    if (inventory[i].name.Contains(itemToSearch))
-                    {
-                        // true
-                        results.Add(i);
-                        //Adding the content to results.
-                    }
-                }
-            }
-            //Whatever that has been added to results will be added to a array.
-            return results.ToArray();
-        }
+
+
+
+
+        //public int[] SearchInventory(string itemToSearch)
+        //{
+        //    //Iterate over inventory and find contains of itemToSearch
+        //    //int[] results = new int[20];
+        //    List<int> results = new List<int>();
+
+        //    //search stuff magic
+        //    for (int i = 0; i < inventory.Length; i++)
+        //    {
+        //        if (inventory[i] != null)
+        //        {
+        //            //The next line is checking, if the inventory has an item within it that contains a keyword "name"
+        //            //Execute the code.
+        //            if (inventory[i].name.Contains(itemToSearch))
+        //            {
+        //                // true
+        //                results.Add(i);
+        //                //Adding the content to results.
+        //            }
+        //        }
+        //    }
+        //    //Whatever that has been added to results will be added to a array.
+        //    return results.ToArray();
+        //}
         //This function is to see if there is a free spot in the inventory.
         //This is to prevent an error and for checking if a spare space exists.
+
+
         public void AddInventory (params Item[] itemsToAdd) 
         {
             for (int i = 0; i < itemsToAdd.Length; i++)
