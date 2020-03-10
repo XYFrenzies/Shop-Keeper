@@ -389,12 +389,12 @@ namespace Project_Assessment
 
         }
 
-        static public int SearchingInventory(ref int count)
+        static public int SearchingInventory(ref int count, ref Inventory inv)
         {
             count = 0;// reverting count back to 0.
-            for (int i = 0; i < playerInventory.InventoryLength; i++)
+            for (int i = 0; i < inv.InventoryLength; i++)
             {
-                if (playerInventory.inventory[i] != null)
+                if (inv.inventory[i] != null)
                 {
                     count += 1;//Adds to the count for every item in the array.
                 }
@@ -424,7 +424,7 @@ namespace Project_Assessment
                     if (playerInteraction == "B")
                     {//If the player presses b or B.
                         //This is for checking if theres nothing in the array.
-                        SearchingInventory(ref counting);
+                        SearchingInventory(ref counting, ref shopKeeperInventory);
                         if (counting == 0)
                         {
                             Console.WriteLine("\nSorry, I have nothing to sell you.");
@@ -533,7 +533,7 @@ namespace Project_Assessment
                     //If the player presses sell, use this statement.
                     if (playerInteraction == "S")
                     {
-                        SearchingInventory(ref counting);//Uses the function seachinginventory to find the amount of space left in the inventory.
+                        SearchingInventory(ref counting, ref playerInventory);//Uses the function seachinginventory to find the amount of space left in the inventory.
                         for (int r = 0; r < 2; r++)
                         {//This is for checking if theres nothing in the array.
                             if (counting == 0)
@@ -735,7 +735,7 @@ namespace Project_Assessment
                             {//If the player says forhonor without any spaces. This statement will continue.
                                 Console.Clear();//Clears the console.
 
-                                SearchingInventory(ref counting);
+                                SearchingInventory(ref counting, ref shopKeeperSecretInventory);
                                 //This is for checking if theres nothing in the array.
                                 if (counting == 0)
                                 {
