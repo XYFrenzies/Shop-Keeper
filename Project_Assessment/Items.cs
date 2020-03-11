@@ -11,8 +11,8 @@ namespace Project_Assessment
     {
         //This will be publically used
         public string name;
-        public int weightOfItem;
-        public int costOfItem;
+        public ulong weightOfItem;
+        public ulong costOfItem;
 
 
         public Item()
@@ -25,7 +25,7 @@ namespace Project_Assessment
             costOfItem = 1;
         }
 
-        public Item(string a_nameOfItem, int a_weightOfItem, int a_costOfItem)
+        public Item(string a_nameOfItem, ulong a_weightOfItem, ulong a_costOfItem)
         {
             //This is a reference to every class that uses these universally used definitions.
 
@@ -49,14 +49,14 @@ namespace Project_Assessment
         }
         //This will be used to define the name of each item.
         //It can easily be used in a writeline statement.
-        public int Weight
+        public ulong Weight
         {
             get { return weightOfItem; }
             set { this.weightOfItem = value; }
         }
         //This will be used to define the weight of the item.
         //It can easily be used in a writeline statement.
-        public int Cost
+        public ulong Cost
         {
             get { return costOfItem; }
             set { this.costOfItem = value; }

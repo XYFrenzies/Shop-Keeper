@@ -9,10 +9,10 @@ namespace Project_Assessment
     public class Potion : Item
     {
         private string potionName;
-        private int weightOfPotion;
-        private int costOfPotion;
+        private ulong weightOfPotion;
+        private ulong costOfPotion;
         private string typeOfPotion; //This can be a good potion or bad potion.
-        private int changedStatsOfPotion; //This is what the Potion can do in terms of stats.
+        private ulong changedStatsOfPotion; //This is what the Potion can do in terms of stats.
         private string potionDescription; //This is where the user can see what it does.
 
         public override void Print()
@@ -38,7 +38,7 @@ namespace Project_Assessment
             potionDescription = "Maybe it can be good, we will see";
         }
         //This is comparing the potions and items deatils. Where Items is the parent and the potion is the child.
-        public Potion(string a_nameOfPotion, int a_weightOfPotion, int a_costOfPotion, string a_statIncreaseOfPotion, int a_increasedBonusesOfPotion, string a_potionDescription) : 
+        public Potion(string a_nameOfPotion, ulong a_weightOfPotion, ulong a_costOfPotion, string a_statIncreaseOfPotion, ulong a_increasedBonusesOfPotion, string a_potionDescription) : 
             base(a_nameOfPotion, a_weightOfPotion, a_costOfPotion)
         {
 
@@ -58,7 +58,7 @@ namespace Project_Assessment
         //This will be used to define the type of potion when creating the potion through item.
         //It can easily be used in a writeline statement.
 
-        public int ChangedStatsOfPotion
+        public ulong ChangedStatsOfPotion
         {
             get { return changedStatsOfPotion; }
             set { this.changedStatsOfPotion = value; }

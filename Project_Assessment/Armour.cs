@@ -19,10 +19,10 @@ namespace Project_Assessment
 
 
         private string armourName; //This is as a placeholder for the name in the item class.
-        private int weightOfArmour; //This is as a placeholder for the value of weight in item.
-        private int costOfArmour; //This is as a placeholder for the value of cost in item.
+        private ulong weightOfArmour; //This is as a placeholder for the value of weight in item.
+        private ulong costOfArmour; //This is as a placeholder for the value of cost in item.
         private string armourType; //Whether it is a helmet, boots or chestpiece.
-        private int armourHealth; // How much damage can it withstand.
+        private ulong armourHealth; // How much damage can it withstand.
         private string armourResistence; //What type of Weapon can it withstand.
         public Armour() 
         {
@@ -39,7 +39,7 @@ namespace Project_Assessment
         }
 
         //This is comparing the armour and items deatils. Where Items is the parent and armour is the child.
-        public Armour(string a_armourName, int a_weightOfArmour, int a_costOfArmour, string a_armourType, int a_armourHealth, string a_armourResistence) : 
+        public Armour(string a_armourName, ulong a_weightOfArmour, ulong a_costOfArmour, string a_armourType, ulong a_armourHealth, string a_armourResistence) : 
             base(a_armourName, a_weightOfArmour, a_costOfArmour)
         {
             armourName = a_armourName;
@@ -58,7 +58,7 @@ namespace Project_Assessment
             //It can easily be used in a writeline statement.
         }
 
-        public int ArmourHealth
+        public ulong ArmourHealth
         {
             get { return armourHealth; }
             set { this.armourHealth = value; }

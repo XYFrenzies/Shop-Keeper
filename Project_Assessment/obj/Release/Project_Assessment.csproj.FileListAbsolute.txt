@@ -1,0 +1,6 @@
+D:\AIE programming course\Shop-Keeper\Project_Assessment\bin\Release\Project_Assessment.exe.config
+D:\AIE programming course\Shop-Keeper\Project_Assessment\bin\Release\Project_Assessment.exe
+D:\AIE programming course\Shop-Keeper\Project_Assessment\bin\Release\Project_Assessment.pdb
+D:\AIE programming course\Shop-Keeper\Project_Assessment\obj\Release\Project_Assessment.csprojAssemblyReference.cache
+D:\AIE programming course\Shop-Keeper\Project_Assessment\obj\Release\Project_Assessment.exe
+D:\AIE programming course\Shop-Keeper\Project_Assessment\obj\Release\Project_Assessment.pdb

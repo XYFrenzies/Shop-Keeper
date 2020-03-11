@@ -43,8 +43,8 @@ namespace Project_Assessment
         //This is a undefined variable that is used as part of the checking for what the player says.
         static public string _playerInteraction;
         private string playerInteraction;
-        static public int playerMoney = 1000; //Default amounts of money that can be spent.
-        static public int shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.        
+        static public ulong playerMoney = 1000; //Default amounts of money that can be spent.
+        static public ulong shopKeeperMoney = 1000; //Default amounts of money that the shop keeper can hold.        
 
         static protected int counting = 0;
 
@@ -122,14 +122,14 @@ namespace Project_Assessment
             
         }
         //This is a statement to help out the superuser function within the beginningmessage to catch any of the errors that the player may have done.
-        static public void TryandCatch(ref int integerPlayerValue, string stringPlayerValue) 
+        static public void TryandCatch(ref ulong integerPlayerValue, string stringPlayerValue) 
         {
             for (int i = 0; i < 2; i++)
             {
                 try
                 {
                     stringPlayerValue = Console.ReadLine();//The player is said to input a weapons range.
-                    integerPlayerValue = Convert.ToInt32(stringPlayerValue);//Converts the interaction to an integer.
+                    integerPlayerValue = Convert.ToUInt64(stringPlayerValue);//Converts the interaction to an integer.
                     break;
                 }
                 catch
@@ -141,7 +141,7 @@ namespace Project_Assessment
 
         }
         //This is a function that moves the item from one array to another and declairs the new location.
-        static public void MovingArrays(ref Item[] a_seller, ref Item[] a_buyer, int newLocation)
+        static public void MovingArrays(ref Item[] a_seller, ref Item[] a_buyer, ulong newLocation)
         {
             //Within this function, its job is to move an item between the two different arrays.
             //When a player buys or sells an item, the item is found within the array, the function finds space in the other array and then places it in there.
@@ -175,8 +175,8 @@ namespace Project_Assessment
                  //This is a manual way of placing the values of the items onto the text file.
                     string theItemTypeSK = shopKeeperInventory.inventory[i].GetType().ToString();//The type of string is defined first.
                     string theNameSK = shopKeeperInventory.inventory[i].Name;//This is the name of the item.
-                    int theWeightSK = shopKeeperInventory.inventory[i].Weight;//This is the Weight of the item.
-                    int theCostSK = shopKeeperInventory.inventory[i].Cost;//This is the cost of the item.
+                    ulong theWeightSK = shopKeeperInventory.inventory[i].Weight;//This is the Weight of the item.
+                    ulong theCostSK = shopKeeperInventory.inventory[i].Cost;//This is the cost of the item.
                     string a1 = "|";//This is the attributes of the other variables that are with the class/Item.
                     string a2 = "|";
                     string a3 = "|";
@@ -229,8 +229,8 @@ namespace Project_Assessment
                 {//If it isnt equal to null.
                     string theItemTypeP = playerInventory.inventory[j].GetType().ToString();//The type of string is defined first.
                     string theNameP = playerInventory.inventory[j].Name;//This is the name of the item.
-                    int theWeightP = playerInventory.inventory[j].Weight;//This is the Weight of the item.
-                    int theCostP = playerInventory.inventory[j].Cost;//This is the cost of the item.
+                    ulong theWeightP = playerInventory.inventory[j].Weight;//This is the Weight of the item.
+                    ulong theCostP = playerInventory.inventory[j].Cost;//This is the cost of the item.
                     string a1 = "|";//This is the attributes of the other variables that are with the class/Item.
                     string a2 = "|";
                     string a3 = "|";
@@ -280,8 +280,8 @@ namespace Project_Assessment
                  //This is a manual way of placing the values of the items onto the text file.
                     string theItemTypeSSK = shopKeeperSecretInventory.inventory[k].GetType().ToString();//The type of string is defined first.
                     string theNameSSK = shopKeeperSecretInventory.inventory[k].Name;//This is the name of the item.
-                    int theWeightSSK = shopKeeperSecretInventory.inventory[k].Weight;//This is the Weight of the item.
-                    int theCostSSK = shopKeeperSecretInventory.inventory[k].Cost;//This is the cost of the item.
+                    ulong theWeightSSK = shopKeeperSecretInventory.inventory[k].Weight;//This is the Weight of the item.
+                    ulong theCostSSK = shopKeeperSecretInventory.inventory[k].Cost;//This is the cost of the item.
                     string a1 = "|";//This is the attributes of the other variables that are with the class/Item.
                     string a2 = "|";
                     string a3 = "|";
@@ -346,11 +346,11 @@ namespace Project_Assessment
                     {
                         case "Project_Assessment.Weapon"://If the projectDefiner is named Project_Assessment.Weapon...
                                                          //Converting a string to a int.
-                            int convertToIntWeightW = Int32.Parse(args[2]);//Converting the weapon weight to a int from string.
-                            int convertToIntCostW = Int32.Parse(args[3]);//Converting the weapon Cost to a int from string.
-                            int convertToIntRangeW = Int32.Parse(args[4]);//Converting the weapon Range to a int from string.
-                            int convertToIntDamageW = Int32.Parse(args[5]);//Converting the weapon Damage to a int from string.
-                            int convertToIntAttackSpeedW = Int32.Parse(args[6]);//Converting the weapon AttackSpeed to a int from string.
+                            ulong convertToIntWeightW = UInt32.Parse(args[2]);//Converting the weapon weight to a int from string.
+                            ulong convertToIntCostW = UInt32.Parse(args[3]);//Converting the weapon Cost to a int from string.
+                            ulong convertToIntRangeW = UInt32.Parse(args[4]);//Converting the weapon Range to a int from string.
+                            ulong convertToIntDamageW = UInt32.Parse(args[5]);//Converting the weapon Damage to a int from string.
+                            ulong convertToIntAttackSpeedW = UInt32.Parse(args[6]);//Converting the weapon AttackSpeed to a int from string.
 
 
                             //For weapons, the categories are displayed as Name, Weight, Cost, Range, Damage, AttackSpeed.
@@ -360,9 +360,9 @@ namespace Project_Assessment
                             break;//Leaves the array.
 
                         case "Project_Assessment.Armour"://If the projectDefiner is named Project_Assessment.Armour...
-                            int convertToIntWeightA = Int32.Parse(args[2]);//Converting the Armour weight to a int from string.
-                            int convertToIntCostA = Int32.Parse(args[3]);//Converting the Armour Cost to a int from string.
-                            int convertToIntHealthA = Int32.Parse(args[5]);//Converting the Armour Health to a int from string.
+                            ulong convertToIntWeightA = UInt32.Parse(args[2]);//Converting the Armour weight to a int from string.
+                            ulong convertToIntCostA = UInt32.Parse(args[3]);//Converting the Armour Cost to a int from string.
+                            ulong convertToIntHealthA = UInt32.Parse(args[5]);//Converting the Armour Health to a int from string.
 
 
                             //For Armour, the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
@@ -372,9 +372,9 @@ namespace Project_Assessment
 
                         case "Project_Assessment.Potion"://If the projectDefiner is named Project_Assessment.Potion...
                                                          //For Potions, the categories are displayed as Name, Weight, Cost, Type of Potion, Stat changes, Description.
-                            int convertToIntWeightP = Int32.Parse(args[2]);//Converting the Potion weight to a int from string.
-                            int convertToIntCostP = Int32.Parse(args[3]);//Converting the Potion Cost to a int from string.
-                            int convertToIntIBOP = Int32.Parse(args[5]);//Converting the Potion increased bonuses to a int from string.
+                            ulong convertToIntWeightP = UInt32.Parse(args[2]);//Converting the Potion weight to a int from string.
+                            ulong convertToIntCostP = UInt32.Parse(args[3]);//Converting the Potion Cost to a int from string.
+                            ulong convertToIntIBOP = UInt32.Parse(args[5]);//Converting the Potion increased bonuses to a int from string.
 
                             //For Armour, the categories are displayed as Name, Weight, Cost, Type of Gear, Health, What it resists.
                             Item tempPotion = new Potion(args[1], convertToIntWeightP, convertToIntCostP, args[4], convertToIntIBOP, args[6]);
@@ -434,6 +434,7 @@ namespace Project_Assessment
                         }
                         else
                         {
+                            Console.Clear();
                             for (int k = 0; k < shopKeeperInventory.InventoryLength; k++)
                             {//This is checking through the shopKeepers inventory length of the array.
 
@@ -449,15 +450,23 @@ namespace Project_Assessment
                         
                         //This is to check if the player wants to buy the item by the item number before it.
                         Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");
+                        Console.WriteLine("Or do you want to exit to the Main Menu? [Exit]");
                         
                         for (int b = 0; b < 2; b++)
                         {//Looping the statement as it will give the player a chance to redo what they accidentally wrote.
                             try
                             {//Try and catch is used in order to detect if the player had written the correct type of value.
                                 for (int r = 0; r < 2; r++)
-                                {                                    
-                                    playerInteraction = Console.ReadLine();
-                                    int playerValue = Convert.ToInt32(playerInteraction);
+                                {
+                                    _playerInteraction = Console.ReadLine();
+                                    playerInteraction = _playerInteraction.ToUpper();
+
+                                    if (playerInteraction == "EXIT")
+                                    {
+                                        Console.Clear();
+                                        beginningMessage();
+                                    }
+                                    ulong playerValue = Convert.ToUInt64(playerInteraction);
 
                                     //If the inventory space of the playervalue has something in it, then it will display whats in the statement.
                                     if (shopKeeperInventory.inventory[playerValue] != null)
@@ -510,7 +519,7 @@ namespace Project_Assessment
                                             }
                                             else
                                             {
-                                                Console.WriteLine("\nStop wasting my time, tell me Y or N if you want something!\n");                                                
+                                                Console.WriteLine("\nStop wasting my time, tell me Y or N if you want something!\n");
                                                 l = 0;//If the player doesnt press yes or no or the player does not have enough money for the item.
                                                 _playerInteraction = Console.ReadLine();
                                                 playerInteraction = _playerInteraction.ToUpper();
@@ -558,13 +567,22 @@ namespace Project_Assessment
                                 }
                             }
                             Console.WriteLine("\nWhich item would you like to sell? [Write the number next to the item.]");
+                            Console.WriteLine("Or do you want to exit to the Main Menu? [Exit]");
+
 
                             for (int c = 0; c < 2; c++)
                             {
                                 try
                                 {
-                                    playerInteraction = Console.ReadLine();
-                                    int playerSellValue = Convert.ToInt32(playerInteraction);
+                                    _playerInteraction = Console.ReadLine();
+                                    playerInteraction = _playerInteraction.ToUpper();
+
+                                    if (playerInteraction == "EXIT")
+                                    {
+                                        Console.Clear();
+                                        beginningMessage();
+                                    }
+                                    ulong playerSellValue = Convert.ToUInt64(playerInteraction);
                                     //Defines the playerSellValue as an int of playerInterction.
                                     if (playerInventory.inventory[playerSellValue] != null)
                                     {//If the sell value does exist.
@@ -627,14 +645,14 @@ namespace Project_Assessment
                         string newName = _playerInteraction;//Stores the new name of the item thats inputted.
                                                 
                         Console.WriteLine("Weight of the Item [write it in just numbers and no letters and other characters]:");
-                        int playerValueW = 0;//The player value is default at 0.
+                        ulong playerValueW = 0;//The player value is default at 0.
                         TryandCatch(ref playerValueW, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                        int newWeight = playerValueW;//Stores the new weight of the item thats inputted.
+                        ulong newWeight = playerValueW;//Stores the new weight of the item thats inputted.
 
                         Console.WriteLine("Cost of the Item [write it in just numbers and no letters and other characters]: ");                                                                      
-                        int playerValueC = 0;//The playerValue is default at 0.
+                        ulong playerValueC = 0;//The playerValue is default at 0.
                         TryandCatch(ref playerValueC, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                        int newCost = playerValueC;//Stores the new cost of the item thats inputted.
+                        ulong newCost = playerValueC;//Stores the new cost of the item thats inputted.
 
                         //This asks for what type of item that the player would like to classify it as.
                         bool playerInteractionIsCorrect = false;
@@ -656,19 +674,19 @@ namespace Project_Assessment
                                     //If the user says they want to make a weapon.
                                     //This is divised into - range damage attackspeed looking downwards.
                                     Console.WriteLine("Okay, awesome. What is the range in metres? [write it in just NUMBERS and no letters and other characters]");
-                                    int playerValueR = 0; ;//The playerValue of the range is 0;
+                                    ulong playerValueR = 0; ;//The playerValue of the range is 0;
                                     TryandCatch(ref playerValueR, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                                    int newRange = playerValueR;//Stores the new range of the weapon thats inputted.
+                                    ulong newRange = playerValueR;//Stores the new range of the weapon thats inputted.
 
                                     Console.WriteLine("What is the damage of the Weapon? [write it in just NUMBERS and no letters and other characters]");
-                                    int playerValueD = 0;//Converts the interaction to an integer.
+                                    ulong playerValueD = 0;//Converts the interaction to an integer.
                                     TryandCatch(ref playerValueD, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                                    int newDamage = playerValueD;//Stores the new damage of the weapon thats inputted.
+                                    ulong newDamage = playerValueD;//Stores the new damage of the weapon thats inputted.
 
                                     Console.WriteLine("What is the Attack Speed of the Weapon? [write it in just NUMBERS and no letters and other characters]");
-                                    int playerValueAS = 0;//Converts the interaction to an integer.
+                                    ulong playerValueAS = 0;//Converts the interaction to an integer.
                                     TryandCatch(ref playerValueAS, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                                    int newAttackSpeed = playerValueAS;//Stores the new attack speed of the weapon thats inputted.
+                                    ulong newAttackSpeed = playerValueAS;//Stores the new attack speed of the weapon thats inputted.
 
                                     Weapon newWeapon = new Weapon(newName, newWeight, newCost, newRange, newDamage, newAttackSpeed);//Converts the name, weight, cost, range, damage and as into an array
                                     shopKeeperSecretInventory.AddInventory(newWeapon);//Keeps the new weapon in the secret inventory.
@@ -683,9 +701,9 @@ namespace Project_Assessment
                                     string newTypeOfArmour = _playerInteraction;//Stores the type of armour in a string.
 
                                     Console.WriteLine("What is the Health of the armour? [write it in just NUMBERS and no letters and other characters]");
-                                    int playerValueH = 0;//Converts the interaction to an integer.
+                                    ulong playerValueH = 0;//Converts the interaction to an integer.
                                     TryandCatch(ref playerValueH, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                                    int newHealth = playerValueH;//Saves the armous health in newHealth.
+                                    ulong newHealth = playerValueH;//Saves the armous health in newHealth.
 
                                     Console.WriteLine("What weapon does it resist?");
                                     _playerInteraction = Console.ReadLine();//Asks what weapon this armour resists.
@@ -704,11 +722,11 @@ namespace Project_Assessment
                                     string newTypeOfPotion = _playerInteraction;//This stores the potion type into a string called newTypeOfPotion.
 
                                     Console.WriteLine("What are the stat changes by default? [write it in just NUMBERS and no letters and other characters]");
-                                    int playerValuePSC = 0;//Converts the interaction to an integer.
+                                    ulong playerValuePSC = 0;//Converts the interaction to an integer.
                                     TryandCatch(ref playerValuePSC, playerInteraction);//This is a function in case the player accidentally puts in a value that isnt a number.
-                                    int newPStatChange = playerValuePSC;//Saves the the stat changes newPStatChange.
+                                    ulong newPStatChange = playerValuePSC;//Saves the the stat changes newPStatChange.
 
-                                    Console.WriteLine("What weapon does it resist?");
+                                    Console.WriteLine("What is the description of the item? [What does it do?]");
                                     _playerInteraction = Console.ReadLine();//Asking the player what the description is of the item.
                                     string newDescription = _playerInteraction;//Saves the description under the string newDescription.
 
@@ -767,16 +785,24 @@ namespace Project_Assessment
                                     }
                                 }
                           
-                                Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");                                                               
-
+                                Console.WriteLine("\nWould you like to have a look at any of these? [Write the number next to the item.]\n");
+                                Console.WriteLine("Or do you want to exit to the main menu? [Exit]");
                                 for (int d = 0; d < 2; d++)
                                 {
                                     try
                                     {
                                         for (int r = 0; r < 2; r++)
                                         {
-                                            playerInteraction = Console.ReadLine();
-                                            int playerSecretBuyValue = Convert.ToInt32(playerInteraction);
+                                            _playerInteraction = Console.ReadLine();
+                                            playerInteraction = _playerInteraction.ToUpper();
+
+                                            if (playerInteraction == "EXIT")
+                                            {
+                                                Console.Clear();
+                                                beginningMessage();
+                                            }
+
+                                            ulong playerSecretBuyValue = Convert.ToUInt64(playerInteraction);
                                             //If the inventory space of the playervalue has something in it, then it will display whats in the statement.
                                             if (shopKeeperSecretInventory.inventory[playerSecretBuyValue] != null)
                                             {

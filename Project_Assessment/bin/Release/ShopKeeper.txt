@@ -1,3 +1,4 @@
+Project_Assessment.Weapon|Long Sword Of Destiny|20|900|20|100|1
 Project_Assessment.Weapon|The Last DeathBringer|25|1000|3|150|2
 Project_Assessment.Armour|The Holy Headset|15|500|HeadGear|250|CrossBow
 Project_Assessment.Armour|The Holy ChestGuard|25|900|ChestPeice|500|CrossBow
