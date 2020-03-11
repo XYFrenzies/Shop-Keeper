@@ -89,34 +89,37 @@ namespace Project_Assessment
         //This function acts as a "If the player wants to leave, they can leave." If not, they can continue lookin in the shop.
         public void EndStatement()
         {
-            //This will return the players interaction back to the beginning of the begin message loop.
-            Console.WriteLine("\nWould you like to continue looking around in the shop? [Y] [N]\n");
-            _playerInteraction = Console.ReadLine();
-            playerInteraction = _playerInteraction.ToUpper();
-
-            if (playerInteraction == "Y")
+            for (int i = 0; i < 2; i++)
             {
-                //Console.Clear is to romove the words from the console so it is easier to see what is on the next version of the interaction.
-                Console.Clear();
-                beginningMessage();
-
-                //This is to call the function beginningmessage again
-
-            }
-            else if (playerInteraction == "N")
-            {
-                MovingArrayToFile();
-                System.Environment.Exit(0);
-                //This is to exit the console and the program when the player wants to exit.
-            }
-            else
-            {
-                //Incase the player does not produce the correct letter, y or n.
-                Console.WriteLine("\nSorry could you repeat that? Y or N.");
+                //This will return the players interaction back to the beginning of the begin message loop.
+                Console.WriteLine("\nWould you like to continue looking around in the shop? [Y] [N]\n");
                 _playerInteraction = Console.ReadLine();
                 playerInteraction = _playerInteraction.ToUpper();
 
+                if (playerInteraction == "Y")
+                {
+                    //Console.Clear is to romove the words from the console so it is easier to see what is on the next version of the interaction.
+                    Console.Clear();
+                    beginningMessage();
+
+                    //This is to call the function beginningmessage again
+
+                }
+                else if (playerInteraction == "N")
+                {
+                    MovingArrayToFile();
+                    System.Environment.Exit(0);
+                    //This is to exit the console and the program when the player wants to exit.
+                }
+                else
+                {
+                    //Incase the player does not produce the correct letter, y or n.
+                    Console.WriteLine("\nSorry, let me say it again.");
+                    i = 0;
+
+                }
             }
+            
         }
         //This is a statement to help out the superuser function within the beginningmessage to catch any of the errors that the player may have done.
         static public void TryandCatch(ref int integerPlayerValue, string stringPlayerValue) 
@@ -388,7 +391,7 @@ namespace Project_Assessment
             }
 
         }
-
+        //Within this function, the program checks if theres anything in the inventory or not. This will affect the variable count. 
         static public int SearchingInventory(ref int count, ref Inventory inv)
         {
             count = 0;// reverting count back to 0.
@@ -401,8 +404,6 @@ namespace Project_Assessment
             }
             return count;
         }
-
-
         //Beginningmessage is where all the dialouge and the movement between the different functions occur. This is referenced in the main function to start.
         static public void beginningMessage()
         {
@@ -569,13 +570,13 @@ namespace Project_Assessment
                                     {//If the sell value does exist.
                                         Console.Clear();
                                         playerInventory.inventory[playerSellValue].Print();//Overrides the fuinction and uses the inherited item description from their class.
-                                        for (int o = 0; o < 1; o++)
+                                        for (int o = 0; o < 2; o++)
                                         {
                                             Console.WriteLine($"\nI like the looks of this item, could i take it? You will get " +
                                             $"{playerInventory.inventory[playerSellValue].Cost} in return. Yes or No [Y] [N].\n");
                                             _playerInteraction = Console.ReadLine();//Askes for player input.
                                             playerInteraction = _playerInteraction.ToUpper();//CHanges to an uppercase
-                                            for (int p = 0; p < 1; p++)
+                                            for (int p = 0; p < 2; p++)
                                             {
                                                 if (playerInteraction == "Y")
                                                 {//If the player says yes
@@ -591,6 +592,13 @@ namespace Project_Assessment
                                                     Program noStatement = new Program();
                                                     noStatement.EndStatement();//Goes to the endstatement function to see if the player wants to continue.
                                                 }
+                                                else 
+                                                {
+                                                    Console.WriteLine("Sorry what did you say? [Y] or [N]");
+                                                    p = 0;
+                                                    _playerInteraction = Console.ReadLine();//Askes for player input.
+                                                    playerInteraction = _playerInteraction.ToUpper();//Changes to an uppercase
+                                                }
                                             }
                                         }
                                     }
@@ -602,9 +610,9 @@ namespace Project_Assessment
                                     }
                                 }
 
-                                catch
+                                catch//Incase an error occurs.
                                 {
-                                    Console.WriteLine("You have written the wrong value type, try again.");
+                                    Console.WriteLine("Sorry you dont have that available for offer. What item would you like to sell again?");
                                     c = 0;
                                 }
                             }
@@ -792,13 +800,9 @@ namespace Project_Assessment
                                                             $"and now have {playerMoney} left.\n");//Displaying to the player that they have purchased the item.
 
                                                         //This is creating buyerArrayChange to a definition of calling a function. This is called when a transaction occurs. 
-                                                        MovingArrays(ref shopKeeperSecretInventory.inventory, ref playerInventory.inventory, playerSecretBuyValue);                                                        
-                                                        for (int m = 0; m < 1; m++)
-                                                        {
-                                                            Program continueShop = new Program();//This is creating continueShop to a definition of calling a method.
-                                                            continueShop.EndStatement();//This is calling the function EndStatement.
-                                                            m = 0;
-                                                        }
+                                                        MovingArrays(ref shopKeeperSecretInventory.inventory, ref playerInventory.inventory, playerSecretBuyValue);
+                                                        Program continueShop = new Program();//This is creating continueShop to a definition of calling a method.
+                                                        continueShop.EndStatement();//This is calling the function EndStatement.
                                                     }
                                                     else if (playerInteraction == "Y" && playerMoney < shopKeeperSecretInventory.inventory[playerSecretBuyValue].Cost)
                                                     {

@@ -1,0 +1,5 @@
+Project_Assessment.Weapon|The Last DeathBringer|25|1000|3|150|2
+Project_Assessment.Armour|The Holy Headset|15|500|HeadGear|250|CrossBow
+Project_Assessment.Armour|The Holy ChestGuard|25|900|ChestPeice|500|CrossBow
+Project_Assessment.Potion|God Almighty Potion|1|300|gives you health of about |200|Its so strong that it would only be used in a life or death situation.
+Project_Assessment.Weapon|Enchanted CrossBow of Truth|10|1000|500|70|1
