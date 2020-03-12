@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Project_Assessment
 {
-    class Inventory
+    public class Inventory
     {
         public Item[] inventory;
 
@@ -23,6 +23,19 @@ namespace Project_Assessment
 
         //This function is to see if there is a free spot in the inventory.
         //This is to prevent an error and for checking if a spare space exists.
+
+        static public int SearchingInventory(ref int count, ref Inventory inv)
+        {
+            count = 0;// reverting count back to 0.
+            for (int i = 0; i < inv.InventoryLength; i++)
+            {
+                if (inv.inventory[i] != null)
+                {
+                    count += 1;//Adds to the count for every item in the array.
+                }
+            }
+            return count;
+        }
 
 
         public void AddInventory (params Item[] itemsToAdd) 
